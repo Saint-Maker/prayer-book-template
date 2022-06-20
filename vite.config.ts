@@ -12,4 +12,7 @@ export default defineConfig({
       enabled: false,
     },
   })],
+  build: {
+    outDir: './build',
+  },
 });
