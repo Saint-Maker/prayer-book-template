@@ -20,8 +20,8 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
           <ChakraProvider theme={theme}>
             <Router>
               <Routes>
-                <Route path="/" element={<App/>}/>
-                <Route path="/prayers" element={<Prayers/>}/>
+                <Route path="/prayer-book-template-a/" element={<App/>}/>
+                <Route path="/prayer-book-template-a/prayers" element={<Prayers/>}/>
               </Routes>
             </Router>
           </ChakraProvider>
