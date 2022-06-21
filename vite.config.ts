@@ -5,7 +5,6 @@ import manifest from './manifest.json';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/prayer-book-template-a/',
   plugins: [react(), vitePWA({
     includeAssets: ['favicon.ico', 'robots.txt', 'apple-touch-icon.png'],
     manifest,

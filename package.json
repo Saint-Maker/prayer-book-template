@@ -2,13 +2,12 @@
   "name": "prayer-book",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://saint-maker.github.io/prayer-book-template-a/",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "https-preview": "serve dist",
-    "predeploy": "npm run build",
+    "predeploy": "yarn build",
     "deploy": "gh-pages -d build"
   },
   "dependencies": {
