@@ -5,7 +5,6 @@ import {BsMoonFill, BsSunFill, BsTrashFill} from 'react-icons/bs';
 import {useSelector, useDispatch} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
 import {nanoid} from 'nanoid';
-import autosize from 'react-textarea-autosize';
 
 import {selectPrayers} from '../redux/store';
 import {getPrayers, addPrayer} from '../redux/slice/prayerSlice';
@@ -15,10 +14,15 @@ import Layout from '../components/Layout';
 import type {AppDispatch} from '../redux/store';
 import DeletePrayerAlert from '../components/DeletePrayerAlert';
 
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+import '../styles/pagesPrayers.css';
+
 function Prayer() {
   const {isOpen, onOpen, onClose} = useDisclosure();
   const {isOpen: isOpenAlert, onOpen: onOpenAlert, onClose: onCloseAlert} = useDisclosure();
   const {colorMode, toggleColorMode} = useColorMode();
+  const [text, setText] = useState('');
   const [title, setTitle] = useState('');
   const [addToggled, setAddToggled] = useState(false);
   const btnRef = useRef<HTMLButtonElement>(null);
@@ -54,9 +58,8 @@ function Prayer() {
   const formSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const title = (e.target as any).title as HTMLInputElement;
-    const text = (e.target as any).text as HTMLTextAreaElement;
 
-    addPrayerHandler(title.value, text.value);
+    addPrayerHandler(title.value, text);
     (e.target as HTMLFormElement).reset();
     toggleAdd();
   };
@@ -85,12 +88,11 @@ function Prayer() {
               required/>
             {title.length > 0 && (
               <HStack my={2} alignItems="flex-start">
-                <Textarea
-                  name="text"
-                  as={autosize} resize="none"
+                <ReactQuill
                   placeholder="Prayer text..."
-                  autoComplete='off'
-                  required/>
+                  theme="snow"
+                  value={text}
+                  onChange={setText} />;
                 <Button type="submit" colorScheme="green">Add</Button>
               </HStack>
             )}

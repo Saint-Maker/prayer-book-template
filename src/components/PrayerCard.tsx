@@ -23,7 +23,9 @@ function PrayerCard({id, title, text}: Props) {
         <IconButton onClick={onOpen} aria-label="Delete prayer" icon={<BsTrashFill/>} size="sm" colorScheme="red"/>
       </Button>
       <Box bg={bg} my="2" mx="4" p="1" rounded="sm">
-        <Text>{text}</Text>
+        {/* This won't (hypothetically) be dangerous for now since the only one the user could sabotage is themselves.
+        However, if we ever integrate a sharing system we will need to run this text through dompurify at its source. */}
+        <Text dangerouslySetInnerHTML={{__html: text}} />
       </Box>
       <DeletePrayerAlert isOpen={isOpen} onClose={onClose} all={false} id={id}/>
     </Box>
