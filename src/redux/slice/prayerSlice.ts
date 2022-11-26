@@ -14,6 +14,17 @@ export const addPrayer = createAsyncThunk(
       return idb.writeData('prayers', [prayer, ...data]);
     },
 );
+export const editPrayer = createAsyncThunk(
+    'prayer/editPrayer',
+    async (editedPrayer: Prayer) => {
+      const data = await idb.readData('prayers') || [];
+      const updatedPrayers = data.map((prayer) => {
+        if ((prayer as Prayer).id === editedPrayer.id) return editedPrayer;
+        return prayer;
+      });
+      return idb.writeData('prayers', updatedPrayers);
+    },
+);
 export const deletePrayer = createAsyncThunk(
     'prayer/deletePrayer',
     async (id: string) => {
@@ -46,6 +57,9 @@ const prayerSlice = createSlice({
       state.loading = false;
     },
     [addPrayer.fulfilled.type]: (state, action) => {
+      state.data = action.payload as Prayer[];
+    },
+    [editPrayer.fulfilled.type]: (state, action) => {
       state.data = action.payload as Prayer[];
     },
     [deletePrayer.fulfilled.type]: (state, action) => {
