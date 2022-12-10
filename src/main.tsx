@@ -11,6 +11,7 @@ import store from './redux/store';
 import Prayers from './pages/prayers';
 import theme from './theme';
 import App from './App';
+import Habits from './pages/habits';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
@@ -22,6 +23,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
               <Routes>
                 <Route path="/" element={<App/>}/>
                 <Route path="/prayers" element={<Prayers/>}/>
+                <Route path="/habits" element={<Habits/>}/>
               </Routes>
             </Router>
           </ChakraProvider>
