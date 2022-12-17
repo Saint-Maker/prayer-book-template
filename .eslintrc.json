@@ -23,7 +23,7 @@
     "rules": {
       "require-jsdoc": "off",
       "max-len": "off",
-      // return to this with a final solution that optimizes the linebreaks per system
+      // TODO: return to this with a final solution that optimizes the linebreaks per system
       "linebreak-style": 0
     }
 }
