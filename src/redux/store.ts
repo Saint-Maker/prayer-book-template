@@ -8,6 +8,7 @@ const store = configureStore({
 type RootState = ReturnType<typeof store.getState>;
 
 export const selectPrayers = (state: RootState) => state.prayers;
+export const selectHabits = (state: RootState) => state.habits;
 export const selectPWA = (state: RootState) => state.pwa;
 export default store;
 
