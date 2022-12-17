@@ -17,12 +17,15 @@ The draft of the SaintMaker PWA. Will eventually include a prayerbook, confessio
 12/10/22
 -make the header and drawer reusable between pages
 -start work on the habit tracker
+
+12/17/22
 -wrap up draft of habit tracker
 -move habit data into indexdb
+-fix editing behavior of habits
+-add prayer book and habits to hamburger
 
 Backlog
 -convert individual habit blocks into a component
--add prayer book and habits to hamburger
 -fix eslint linebreak system to work regardless of windows or linux
 -filter prayer html when implementing import/export functionality
 

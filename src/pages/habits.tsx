@@ -1,18 +1,20 @@
 import {Box, Button, ButtonGroup, Flex, IconButton, Input, Wrap} from '@chakra-ui/react';
 import {nanoid} from 'nanoid';
-import {useEffect, useRef} from 'react';
+import {ChangeEventHandler, useEffect, useRef, useState} from 'react';
 import {AiOutlinePlusCircle} from 'react-icons/ai';
 import {BsPencil} from 'react-icons/bs';
 import {useDispatch, useSelector} from 'react-redux';
 import Header from '../components/Header';
 import Layout from '../components/Layout';
-import {addHabit, deleteHabit, editHabit, getHabits} from '../redux/slice/habitSlice';
+import {addHabit, deleteHabit, editHabit, editHabits, getHabits} from '../redux/slice/habitSlice';
 import {AppDispatch, selectHabits} from '../redux/store';
 
 const weekdays = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
 const defaultWeekStatus = [false, false, false, false, false, false, false];
 
 function Habits() {
+  const [updatedName, setUpdatedName] = useState('');
+  const handleNameUpdate: ChangeEventHandler<HTMLInputElement> = ({currentTarget: {value}}) => setUpdatedName(value);
   const addInputRef = useRef<HTMLInputElement | null>(null);
   const editNameInputRef = useRef<HTMLInputElement | null>(null);
   const dispatch = useDispatch<AppDispatch>();
@@ -37,7 +39,7 @@ function Habits() {
   };
   const updateHabitName = (habit: Habit, newHabitName: string) => {
     if (newHabitName.length === 0) {
-      toggleEditing(habit);
+      toggleEditing(habit.id, habit.name);
       return;
     }
     dispatch(editHabit({...habit, name: newHabitName, editing: false}));
@@ -47,8 +49,14 @@ function Habits() {
     updatedDays[dayIndex] = !updatedDays[dayIndex];
     dispatch(editHabit({...habit, days: updatedDays}));
   };
-  const toggleEditing = (habit: Habit) => {
-    dispatch(editHabit({...habit, editing: !habit.editing}));
+  const toggleEditing = (id: string, name: string) => {
+    setUpdatedName(name);
+    const updatedHabits = [...habits.data].map((habit: Habit) => {
+      const updatedHabit = {...habit};
+      updatedHabit.editing = id === habit.id ? !habit.editing : false;
+      return updatedHabit;
+    });
+    dispatch(editHabits(updatedHabits));
   };
 
   return (
@@ -75,11 +83,11 @@ function Habits() {
                       lineHeight='tight'
                       noOfLines={1}
                     >
-                      {habit.editing ? <Input type='text' placeholder='Edit habits current name' ref={editNameInputRef} /> : habit.name}
+                      {habit.editing ? <Input type='text' placeholder='Edit habits current name' value={updatedName} onChange={handleNameUpdate} ref={editNameInputRef} /> : habit.name}
                     </Box>
                     <IconButton
                       colorScheme={habit.editing ? 'green' : 'gray'}
-                      onClick={() => toggleEditing(habit)}
+                      onClick={() => toggleEditing(habit.id, habit.name)}
                       aria-label="Add prayer"
                       icon={<BsPencil/>}/>
                   </Flex>

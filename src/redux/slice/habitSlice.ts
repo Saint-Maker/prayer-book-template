@@ -25,6 +25,12 @@ export const editHabit = createAsyncThunk(
       return idb.writeData('habits', updatedHabits);
     },
 );
+export const editHabits = createAsyncThunk(
+    'habit/editHabits',
+    async (updatedHabits: Habit[]) => {
+      return idb.writeData('habits', updatedHabits);
+    },
+);
 export const deleteHabit = createAsyncThunk(
     'habit/deleteHabit',
     async (id: string) => {
@@ -54,6 +60,9 @@ const habitSlice = createSlice({
       state.data = action.payload as Habit[];
     },
     [editHabit.fulfilled.type]: (state, action) => {
+      state.data = action.payload as Habit[];
+    },
+    [editHabits.fulfilled.type]: (state, action) => {
       state.data = action.payload as Habit[];
     },
     [deleteHabit.fulfilled.type]: (state, action) => {

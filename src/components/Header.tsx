@@ -1,7 +1,8 @@
 import {HStack, IconButton, Heading, useDisclosure, Button, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerHeader, DrawerOverlay, useColorMode, Box} from '@chakra-ui/react';
 import {ReactElement, useRef} from 'react';
 import {AiFillHome, AiOutlineMenu} from 'react-icons/ai';
-import {BsMoonFill, BsSunFill} from 'react-icons/bs';
+import {BsListUl, BsMoonFill, BsSunFill} from 'react-icons/bs';
+import {GiPrayer} from 'react-icons/gi';
 import {useNavigate} from 'react-router-dom';
 
 type Props = {
@@ -17,7 +18,9 @@ function Header({children, title, headerBtns, drawerBtns}: Props) {
   const {colorMode, toggleColorMode} = useColorMode();
   const btnRef = useRef<HTMLButtonElement>(null);
   const navigate = useNavigate();
-  const gotoHome= () => navigate('/');
+  const gotoHome = () => navigate('/');
+  const gotoPrayers = () => navigate('/prayers');
+  const gotoHabits = () => navigate('/habits');
 
   return (
     <>
@@ -51,6 +54,8 @@ function Header({children, title, headerBtns, drawerBtns}: Props) {
           <DrawerBody experimental_spaceY={2}>
             <>
               <Button onClick={gotoHome} w="full" leftIcon={<AiFillHome/>} justifyContent="flex-start">Home</Button>
+              <Button onClick={gotoPrayers} disabled={window.location.pathname === '/prayers'} w="full" leftIcon={<GiPrayer/>} justifyContent="flex-start">Prayer Book</Button>
+              <Button onClick={gotoHabits} disabled={window.location.pathname === '/habits'} w="full" leftIcon={<BsListUl/>} justifyContent="flex-start">Habits</Button>
               <Button onClick={toggleColorMode} w="full" leftIcon={colorMode === 'light' ? <BsMoonFill/> : <BsSunFill/>} justifyContent="flex-start">Toggle {colorMode === 'light' ? 'Dark' : 'Light'}
               </Button>
               {drawerBtns}
