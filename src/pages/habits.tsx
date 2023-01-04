@@ -6,11 +6,11 @@ import {BsPencil} from 'react-icons/bs';
 import {useDispatch, useSelector} from 'react-redux';
 import Header from '../components/Header';
 import Layout from '../components/Layout';
+import {DEFAULT_HABIT_WEEK} from '../constants/habits';
 import {addHabit, deleteHabit, editHabit, editHabits, getHabits} from '../redux/slice/habitSlice';
 import {AppDispatch, selectHabits} from '../redux/store';
 
 const weekdays = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
-const defaultWeekStatus = [false, false, false, false, false, false, false];
 
 function Habits() {
   const [updatedName, setUpdatedName] = useState('');
@@ -29,7 +29,7 @@ function Habits() {
     dispatch(addHabit({
       id: nanoid(16),
       name: addInputRef.current.value,
-      days: defaultWeekStatus,
+      days: DEFAULT_HABIT_WEEK,
       editing: false,
     }));
     addInputRef.current.value = '';
@@ -94,7 +94,7 @@ function Habits() {
                   <Wrap spacing={2}>
                     {weekdays.map((value, dayIndex) => (
                     // TODO: figure out how to bring the logic from the colorScheme into a function without breaking the typing from chakra
-                      <IconButton colorScheme={habit.days[dayIndex] ? 'green' : !habit.days[dayIndex] && new Date().getDay() === dayIndex ? 'gray' : 'red'} key={`${name}-days-${dayIndex}`}
+                      <IconButton colorScheme={habit.days[dayIndex] ? 'green' : !habit.days[dayIndex] && new Date().getDay() <= dayIndex ? 'gray' : 'red'} key={`${name}-days-${dayIndex}`}
                         onClick={() => toggleHabitForDay(habit, dayIndex)}
                         variant={habit.days[dayIndex] ? 'solid' : 'outline'} aria-label='Add to friends' icon={<p>{value}</p>} />
                     ))}

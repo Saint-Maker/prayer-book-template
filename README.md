@@ -24,10 +24,17 @@ The draft of the SaintMaker PWA. Will eventually include a prayerbook, confessio
 -fix editing behavior of habits
 -add prayer book and habits to hamburger
 
+12/24/22
+
+
 Backlog
+-handle editing locally instead of in state
+-store at least 4 weeks worth of data per habit
 -convert individual habit blocks into a component
 -fix eslint linebreak system to work regardless of windows or linux
 -filter prayer html when implementing import/export functionality
-
+-explore more readable way to push out old weeks
+-decide on and implement coding standards
+-determine PR standards and create github PR template 
 </p>
 </details>

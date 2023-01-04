@@ -1,10 +1,17 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import idb from '../../utils/idb';
+import {getUpdatedHabits} from '../../utils/getUpdatedHabits';
+import {shouldUpdateHabits} from '../../utils/shouldUpdateHabits';
 
 export const getHabits = createAsyncThunk(
     'habit/getHabits',
     async () => {
-      return idb.readData('habits');
+      let data = (await idb.readData('habits') || []) as Habit[];
+      if (shouldUpdateHabits()) {
+        data = getUpdatedHabits([...data]);
+        idb.writeData('habits', data);
+      }
+      return data;
     },
 );
 export const addHabit = createAsyncThunk(
