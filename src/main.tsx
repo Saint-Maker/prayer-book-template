@@ -1,4 +1,3 @@
-import React from 'react';
 import ReactDOM from 'react-dom/client';
 
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
@@ -14,7 +13,7 @@ import App from './App';
 import Habits from './pages/habits';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-    <React.StrictMode>
+    <>
       <ColorModeScript initialColorMode={theme.config.initialColorMode}/>
       <Provider store={store}>
         <AnimatePresence exitBeforeEnter>
@@ -29,7 +28,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
           </ChakraProvider>
         </AnimatePresence>
       </Provider>
-    </React.StrictMode>,
+    </>,
 );
 
 if ('serviceWorker' in navigator) {
