@@ -58,6 +58,7 @@ export const Habit = ({habit}: HabitProps) => {
                   <Text display='flex' alignItems='center' fontSize='xl' as='b'>{habit.name}</Text>
                 )}
                 <IconButton
+                  ml='2'
                   colorScheme={habit.editing ? 'green' : 'gray'}
                   onClick={() => toggleEditing(habit.id, habit.name)}
                   aria-label="Add prayer"
@@ -70,6 +71,7 @@ export const Habit = ({habit}: HabitProps) => {
                   icon={<BsArrowLeftCircle/>}
                   disabled={weekSelected === 0}/>
                 <IconButton
+                  ml='2'
                   onClick={() => weekSelected < 3 && setWeekSelected(weekSelected+1)}
                   aria-label="Add prayer"
                   icon={<BsArrowRightCircle/>}
