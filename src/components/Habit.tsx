@@ -1,4 +1,4 @@
-import {Box, Flex, Input, IconButton, Wrap, ButtonGroup, Button} from '@chakra-ui/react';
+import {Box, Flex, Input, IconButton, Wrap, ButtonGroup, Button, Text} from '@chakra-ui/react';
 import {useState, ChangeEventHandler, useRef} from 'react';
 import {BsPencil, BsArrowLeftCircle, BsArrowRightCircle} from 'react-icons/bs';
 import {useDispatch, useSelector} from 'react-redux';
@@ -47,30 +47,36 @@ export const Habit = ({habit}: HabitProps) => {
 
   return (
     <Box pt='2'>
-      <Box borderWidth='1px' borderRadius='lg' overflow='hidden' p='2'>
+      <Box borderWidth='1px' borderRadius='lg' overflow='hidden' py='2'>
         <Flex direction='column' alignItems='center'>
           <Box>
             <Flex direction='row' justifyContent='space-between' pb='2'>
-              <Box
-                fontWeight='semibold'
-                as='h4'
-                lineHeight='tight'
-                noOfLines={1}
-              >
-                {habit.editing ? <Input type='text' placeholder='Edit habits current name' value={updatedName} onChange={handleNameUpdate} ref={editNameInputRef} /> : habit.name}
-              </Box>
-              <IconButton
-                colorScheme={habit.editing ? 'green' : 'gray'}
-                onClick={() => toggleEditing(habit.id, habit.name)}
-                aria-label="Add prayer"
-                icon={<BsPencil/>}/>
+              <Flex justifyContent='start'>
+                {habit.editing ? (
+                  <Input type='text' placeholder='Edit habits current name' value={updatedName} onChange={handleNameUpdate} ref={editNameInputRef} />
+                ) : (
+                  <Text display='flex' alignItems='center' fontSize='xl' as='b'>{habit.name}</Text>
+                )}
+                <IconButton
+                  colorScheme={habit.editing ? 'green' : 'gray'}
+                  onClick={() => toggleEditing(habit.id, habit.name)}
+                  aria-label="Add prayer"
+                  icon={<BsPencil/>}/>
+              </Flex>
+              <Flex justifyContent='end'>
+                <IconButton
+                  onClick={() => weekSelected > 0 && setWeekSelected(weekSelected-1)}
+                  aria-label="Add prayer"
+                  icon={<BsArrowLeftCircle/>}
+                  disabled={weekSelected === 0}/>
+                <IconButton
+                  onClick={() => weekSelected < 3 && setWeekSelected(weekSelected+1)}
+                  aria-label="Add prayer"
+                  icon={<BsArrowRightCircle/>}
+                  disabled={weekSelected === 3}/>
+              </Flex>
             </Flex>
             <Wrap spacing={2}>
-              <IconButton
-                onClick={() => weekSelected > 0 && setWeekSelected(weekSelected-1)}
-                aria-label="Add prayer"
-                icon={<BsArrowLeftCircle/>}
-                disabled={weekSelected === 0}/>
               {weekdays.map((value, index) => {
                 const dayIndex = index + (weekSelected * DAYS_IN_WEEK);
                 const currentDay = new Date().getDay() + 21;
@@ -83,11 +89,6 @@ export const Habit = ({habit}: HabitProps) => {
                   aria-label='Add to friends'
                   icon={<p>{value}</p>} />);
               })}
-              <IconButton
-                onClick={() => weekSelected < 3 && setWeekSelected(weekSelected+1)}
-                aria-label="Add prayer"
-                icon={<BsArrowRightCircle/>}
-                disabled={weekSelected === 3}/>
             </Wrap>
             {habit.editing &&
             <ButtonGroup pt='2'>
