@@ -1,4 +1,3 @@
-import React from 'react';
 import {Box, Button, IconButton, Text, HStack, useColorModeValue, useDisclosure} from '@chakra-ui/react';
 import {BsTrashFill, BsPencil} from 'react-icons/bs';
 
@@ -27,7 +26,7 @@ function PrayerCard({id, title, text, onEdit}: Props) {
         </HStack>
       </Button>
       <Box bg={bg} my="2" mx="4" p="1" rounded="sm">
-        {/* This won't (hypothetically) be dangerous for now since the only one the user could sabotage is themselves.
+        {/* TODO: This won't (hypothetically) be dangerous for now since the only one the user could sabotage is themselves.
         However, if we ever integrate a sharing system we will need to run this text through dompurify at its source. */}
         <Text dangerouslySetInnerHTML={{__html: text}} />
       </Box>

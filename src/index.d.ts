@@ -4,6 +4,13 @@ interface Prayer {
   text: string;
 }
 
+interface Habit {
+  id: string
+  name: string
+  days: boolean[]
+  editing: boolean
+}
+
 interface BeforeInstallPromptEvent extends Event {
   readonly platforms: string[];
   readonly userChoice: Promise<{

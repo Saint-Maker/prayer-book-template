@@ -8,13 +8,15 @@
     "preview": "vite preview",
     "https-preview": "serve dist",
     "predeploy": "yarn build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "test": "vitest --reporter verbose"
   },
   "dependencies": {
     "@chakra-ui/react": "^2.2.1",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
     "@reduxjs/toolkit": "^1.8.2",
+    "date-fns": "^2.29.3",
     "framer-motion": "^6",
     "gh-pages": "^4.0.0",
     "localforage": "^1.10.0",
@@ -40,6 +42,7 @@
     "https-localhost": "^4.7.1",
     "typescript": "^4.6.3",
     "vite": "^2.9.9",
-    "vite-plugin-pwa": "^0.12.0"
+    "vite-plugin-pwa": "^0.12.0",
+    "vitest": "^0.26.3"
   }
 }

@@ -15,6 +15,7 @@ function App(): JSX.Element {
   const navigate = useNavigate();
 
   const gotoPrayers = () => navigate('/prayers');
+  const gotoHabits = () => navigate('/habits');
 
   const installHandler = async (e: React.MouseEvent<HTMLButtonElement>) => {
     if (pwa.deferredPrompt !== null) {
@@ -32,6 +33,9 @@ function App(): JSX.Element {
       <Button
         onClick={gotoPrayers}
         w="full">Prayer Book</Button>
+      <Button
+        onClick={gotoHabits}
+        w="full">Habits</Button>
       <Button onClick={installHandler} style={{
         display: pwa.deferredPrompt ? 'block' : 'none',
       }} w="full" colorScheme="blue">Install</Button>

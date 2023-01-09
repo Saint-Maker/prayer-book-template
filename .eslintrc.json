@@ -5,7 +5,8 @@
     },
     "extends": [
         "plugin:react/recommended",
-        "google"
+        "google",
+        "plugin:react/jsx-runtime"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
@@ -21,6 +22,8 @@
     ],
     "rules": {
       "require-jsdoc": "off",
-      "max-len": "off"
+      "max-len": "off",
+      // TODO: return to this with a final solution that optimizes the linebreaks per system
+      "linebreak-style": 0
     }
 }
