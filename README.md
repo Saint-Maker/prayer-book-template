@@ -15,7 +15,8 @@ The draft of the SaintMaker PWA. Will eventually include a prayerbook, confessio
 <p>  
 
 1. Minimum supported screen size in the SaintMaker is 360px width. As per this article https://worship.agency/mobile-screen-sizes-for-2022-based-on-data-from-2021 that will cover approximately 73% of 2021 mobile users (and I assume an even higher percentage of 2022 mobile users).
-2. Loading, please wait...
+2. We use the react-icons library within this app: https://react-icons.github.io/react-icons/search
+3. Loading, please wait...
 
 </p>
 </details>
@@ -41,12 +42,16 @@ The draft of the SaintMaker PWA. Will eventually include a prayerbook, confessio
 -convert individual habit blocks into a component
 -store 4 weeks of habit data by default
 
+1/9/23
+-set up import/export prayerbook functionality
+-filter prayer html when implementing import/export prayerbook functionality
+-simplify alert modal component
+
 Backlog
 -ensure that past habit data (when a habit is made) is not marked in red
 -figure out text truncation for habit titles
 -handle habit editing locally instead of in state
 -fix eslint linebreak system to work regardless of windows or linux
--filter prayer html when implementing import/export functionality
 -decide on and implement coding standards
 -determine PR standards and create github PR template 
 </p>

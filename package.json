@@ -17,6 +17,7 @@
     "@emotion/styled": "^11",
     "@reduxjs/toolkit": "^1.8.2",
     "date-fns": "^2.29.3",
+    "dompurify": "^2.4.3",
     "framer-motion": "^6",
     "gh-pages": "^4.0.0",
     "localforage": "^1.10.0",
@@ -31,6 +32,7 @@
     "save-dev": "^0.0.1-security"
   },
   "devDependencies": {
+    "@types/dompurify": "^2.4.0",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
     "@typescript-eslint/eslint-plugin": "^5.28.0",
