@@ -1,7 +1,9 @@
 import {Box, Button, IconButton, Text, HStack, useColorModeValue, useDisclosure} from '@chakra-ui/react';
 import {BsTrashFill, BsPencil} from 'react-icons/bs';
-
-import DeletePrayerAlert from './DeletePrayerAlert';
+import {useDispatch} from 'react-redux';
+import {deletePrayer} from '../redux/slice/prayerSlice';
+import {AppDispatch} from '../redux/store';
+import AlertModal from './AlertModal';
 
 type Props = {
   id: string,
@@ -13,6 +15,11 @@ type Props = {
 function PrayerCard({id, title, text, onEdit}: Props) {
   const {isOpen, onOpen, onClose} = useDisclosure();
   const bg = useColorModeValue('gray.100', 'gray.700');
+  const dispatch = useDispatch<AppDispatch>();
+
+  const handleDelete = () => {
+    if (id) dispatch(deletePrayer(id));
+  };
 
   return (
     <Box as="details" w="full">
@@ -30,7 +37,14 @@ function PrayerCard({id, title, text, onEdit}: Props) {
         However, if we ever integrate a sharing system we will need to run this text through dompurify at its source. */}
         <Text dangerouslySetInnerHTML={{__html: text}} />
       </Box>
-      <DeletePrayerAlert isOpen={isOpen} onClose={onClose} all={false} id={id}/>
+      <AlertModal
+        isOpen={isOpen}
+        onClose={onClose}
+        onConfirm={handleDelete}
+        header='Delete prayer'
+        body='Are you sure? You can&apos;t undo this action afterwards.'
+        confirmBtnText='Delete'
+        confirmBtnColor='red' />
     </Box>
   );
 }

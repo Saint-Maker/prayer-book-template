@@ -1,5 +1,5 @@
-import {HStack, IconButton, Heading, useDisclosure, Button, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerHeader, DrawerOverlay, useColorMode, Box} from '@chakra-ui/react';
-import {ReactElement, useRef} from 'react';
+import {HStack, IconButton, Heading, useDisclosure, Button, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerHeader, DrawerOverlay, useColorMode, Box, Flex} from '@chakra-ui/react';
+import {ReactElement, ReactNode, useRef} from 'react';
 import {AiFillHome, AiOutlineMenu} from 'react-icons/ai';
 import {BsListUl, BsMoonFill, BsSunFill} from 'react-icons/bs';
 import {GiPrayer} from 'react-icons/gi';
@@ -9,7 +9,7 @@ type Props = {
     children: unknown,
     title: string,
     headerBtns?: ReactElement
-    drawerBtns?: unknown
+    drawerBtns?: ReactNode
 }
 
 function Header({children, title, headerBtns, drawerBtns}: Props) {
@@ -51,15 +51,15 @@ function Header({children, title, headerBtns, drawerBtns}: Props) {
         <DrawerContent>
           <DrawerCloseButton/>
           <DrawerHeader>Menu</DrawerHeader>
-          <DrawerBody experimental_spaceY={2}>
-            <>
+          <DrawerBody display='flex' experimental_spaceY={2}>
+            <Flex display='flex' direction='column' gap='2' width='100%'>
               <Button onClick={gotoHome} w="full" leftIcon={<AiFillHome/>} justifyContent="flex-start">Home</Button>
               <Button onClick={gotoPrayers} disabled={window.location.pathname === '/prayers'} w="full" leftIcon={<GiPrayer/>} justifyContent="flex-start">Prayer Book</Button>
               <Button onClick={gotoHabits} disabled={window.location.pathname === '/habits'} w="full" leftIcon={<BsListUl/>} justifyContent="flex-start">Habits</Button>
               <Button onClick={toggleColorMode} w="full" leftIcon={colorMode === 'light' ? <BsMoonFill/> : <BsSunFill/>} justifyContent="flex-start">Toggle {colorMode === 'light' ? 'Dark' : 'Light'}
               </Button>
               {drawerBtns}
-            </>
+            </Flex>
           </DrawerBody>
         </DrawerContent>
       </Drawer>
