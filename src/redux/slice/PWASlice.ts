@@ -1,22 +1,22 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
-type Prop = null | BeforeInstallPromptEvent;
+type Prop = null | BeforeInstallPromptEvent
 
 const initialState = {
   deferredPrompt: null,
 } as {
-  deferredPrompt: Prop;
-};
+  deferredPrompt: Prop
+}
 
 const pwaSlice = createSlice({
-  name: 'pwa',
+  name: "pwa",
   initialState,
   reducers: {
     setDeferredPrompt: (state, action: PayloadAction<Prop>) => {
-      state.deferredPrompt = action.payload;
+      state.deferredPrompt = action.payload
     },
-  }},
-);
+  },
+})
 
-export const {setDeferredPrompt} = pwaSlice.actions;
-export default pwaSlice.reducer;
+export const { setDeferredPrompt } = pwaSlice.actions
+export default pwaSlice.reducer
