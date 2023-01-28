@@ -20,7 +20,7 @@ type Props = {
   onEdit: () => void
 }
 
-function PrayerCard({ id, title, text, onEdit }: Props) {
+const PrayerCard = ({ id, title, text, onEdit }: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const bg = useColorModeValue("gray.100", "gray.700")
   const dispatch = useDispatch<AppDispatch>()

@@ -11,7 +11,7 @@ type Props = {
   children: React.ReactNode
 }
 
-function Layout({ children }: Props) {
+const Layout = ({ children }: Props) => {
   const dispatch = useDispatch<AppDispatch>()
 
   useEffect(() => {

@@ -21,7 +21,7 @@ interface Props {
   confirmBtnColor?: string
 }
 
-function AlertModal({
+const AlertModal = ({
   header,
   body,
   cancelBtnText = "Cancel",
@@ -31,7 +31,7 @@ function AlertModal({
   onCancel = onClose,
   onConfirm = () => {},
   confirmBtnColor = "gray",
-}: Props) {
+}: Props) => {
   const cancelRef = useRef<HTMLButtonElement>(null)
 
   return (

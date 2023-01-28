@@ -27,7 +27,7 @@ type Props = {
   drawerBtns?: ReactNode
 }
 
-function Header({ children, title, headerBtns, drawerBtns }: Props) {
+const Header = ({ children, title, headerBtns, drawerBtns }: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   const { colorMode, toggleColorMode } = useColorMode()

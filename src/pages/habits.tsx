@@ -9,7 +9,7 @@ import Layout from "../components/Layout"
 import { addHabit, getHabits } from "../redux/slice/habitSlice"
 import { AppDispatch, selectHabits } from "../redux/store"
 
-function Habits() {
+const Habits = () => {
   const dispatch = useDispatch<AppDispatch>()
   const habits = useSelector(selectHabits)
   const addInputRef = useRef<HTMLInputElement | null>(null)

@@ -10,7 +10,8 @@
     "predeploy": "yarn build",
     "deploy": "gh-pages -d build",
     "test": "vitest --reporter verbose",
-    "format": "prettier --write --no-semi ."
+    "format": "prettier --write --no-semi .",
+    "lint": "eslint . --ext .ts,.tsx --fix"
   },
   "dependencies": {
     "@chakra-ui/react": "^2.2.1",
@@ -42,6 +43,8 @@
     "eslint": ">=5.16.0",
     "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-etc": "^2.0.2",
+    "eslint-plugin-no-inline-styles": "^1.0.5",
     "eslint-plugin-react": "^7.30.0",
     "https-localhost": "^4.7.1",
     "prettier": "2.8.3",

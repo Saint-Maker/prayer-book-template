@@ -3,28 +3,43 @@
         "browser": true,
         "es2021": true
     },
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
+    },
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 2020,
+        "sourceType": "module"
+    },
     "extends": [
         "plugin:react/recommended",
         "google",
         "plugin:react/jsx-runtime",
         "prettier"
     ],
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-        "ecmaFeatures": {
-            "jsx": true
-        },
-        "ecmaVersion": "latest",
-        "sourceType": "module"
-    },
     "plugins": [
         "react",
-        "@typescript-eslint"
+        "@typescript-eslint",
+        "eslint-plugin-no-inline-styles", "etc"
     ],
     "rules": {
-      "require-jsdoc": "off",
-      "max-len": "off",
-      // TODO: return to this with a final solution that optimizes the linebreaks per system
-      "linebreak-style": 0
+        "etc/no-commented-out-code": "error",
+        "no-inline-styles/no-inline-styles": 2,
+        "react/function-component-definition": [2, { "namedComponents": "arrow-function" }],
+        "no-var": "error",
+        "react/destructuring-assignment": "error",
+        "react/no-multi-comp": "error",
+        "no-unsafe-optional-chaining": "warn",
+        "require-jsdoc": "off",
+        "no-console": "error",
+        "react/prefer-read-only-props": "warn",
+        "max-len": "off",
+        // TODO: return to this with a final solution that optimizes the linebreaks per system
+        "linebreak-style": 0
     }
 }

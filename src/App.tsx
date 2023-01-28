@@ -9,7 +9,7 @@ import { setDeferredPrompt } from "./redux/slice/PWASlice"
 
 import type { AppDispatch } from "./redux/store"
 
-function App(): JSX.Element {
+const App = (): JSX.Element => {
   const pwa = useSelector(selectPWA)
   const dispatch = useDispatch<AppDispatch>()
   const navigate = useNavigate()
@@ -41,9 +41,7 @@ function App(): JSX.Element {
         </Button>
         <Button
           onClick={installHandler}
-          style={{
-            display: pwa.deferredPrompt ? "block" : "none",
-          }}
+          display={pwa.deferredPrompt ? "block" : "none"}
           w="full"
           colorScheme="blue"
         >

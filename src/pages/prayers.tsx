@@ -30,7 +30,7 @@ import { BsDownload, BsTrashFill, BsUpload } from "react-icons/bs"
 import AlertModal from "../components/AlertModal"
 import DOMPurify from "dompurify"
 
-function Prayer() {
+const Prayer = () => {
   const {
     isOpen: isDeleteAlertOpen,
     onOpen: onDeleteAlertOpen,
@@ -176,11 +176,11 @@ function Prayer() {
               Download Prayerbook
             </Button>
             <div>
-              <input
+              <Input
                 type="file"
                 ref={fileInputRef}
                 onChange={uploadPrayerbook}
-                style={{ display: "none" }}
+                display="none"
               />
               <Button
                 w="full"
