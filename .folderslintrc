@@ -1,0 +1,12 @@
+{
+  "root": "src", 
+  "rules": [
+    "components/*",
+    "constants",
+    "pages/*",
+    "redux/*/slice",
+    "styles",
+    "unitTests",
+    "utils"
+   ]
+}

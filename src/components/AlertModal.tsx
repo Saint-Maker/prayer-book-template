@@ -29,6 +29,7 @@ const AlertModal = ({
   isOpen,
   onClose,
   onCancel = onClose,
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   onConfirm = () => {},
   confirmBtnColor = "gray",
 }: Props) => {

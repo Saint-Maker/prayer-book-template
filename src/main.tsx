@@ -7,10 +7,10 @@ import { registerSW } from "virtual:pwa-register"
 import { AnimatePresence } from "framer-motion"
 import store from "./redux/store"
 
-import Prayers from "./pages/prayers"
 import theme from "./theme"
 import App from "./App"
-import Habits from "./pages/habits"
+import Prayers from "./pages/Prayers"
+import Habits from "./pages/Habits"
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <>

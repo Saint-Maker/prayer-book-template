@@ -19,7 +19,7 @@ const App = (): JSX.Element => {
 
   const installHandler = async (e: React.MouseEvent<HTMLButtonElement>) => {
     if (pwa.deferredPrompt !== null) {
-      pwa.deferredPrompt.prompt()
+      await pwa.deferredPrompt.prompt()
       const { outcome } = await pwa.deferredPrompt.userChoice
       if (outcome === "accepted") {
         dispatch(setDeferredPrompt(null))
@@ -40,7 +40,7 @@ const App = (): JSX.Element => {
           Habits
         </Button>
         <Button
-          onClick={installHandler}
+          onClick={void installHandler}
           display={pwa.deferredPrompt ? "block" : "none"}
           w="full"
           colorScheme="blue"

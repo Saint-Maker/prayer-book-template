@@ -16,6 +16,23 @@
         "ecmaVersion": 2020,
         "sourceType": "module"
     },
+    // "overrides": [
+    //     {
+    //         "files": ["*.ts", "*.tsx"], // Your TypeScript files extension
+        
+    //         // As mentioned in the comments, you should extend TypeScript plugins here,
+    //         // instead of extending them outside the `overrides`.
+    //         // If you don"t want to extend any rules, you don"t need an `extends` attribute.
+    //         "extends": [
+    //             "plugin:@typescript-eslint/recommended",
+    //             "plugin:@typescript-eslint/recommended-requiring-type-checking"
+    //         ],
+        
+    //         "parserOptions": {
+    //             "project": ["./tsconfig.json"] // Specify it only for TypeScript files
+    //         }
+    //     }
+    // ],
     "extends": [
         "plugin:react/recommended",
         "google",
@@ -25,9 +42,31 @@
     "plugins": [
         "react",
         "@typescript-eslint",
-        "eslint-plugin-no-inline-styles", "etc"
+        "eslint-plugin-no-inline-styles", 
+        "check-file",
+        "etc"
     ],
     "rules": {
+        "@typescript-eslint/no-unsafe-assignment": "off",
+        "no-unused-vars": "off",
+        "@typescript-eslint/no-unused-vars": "off",
+        "@typescript-eslint/prefer-optional-chain": "warn",
+        // "@typescript-eslint/prefer-nullish-coalescing": "error",
+        "prefer-spread": "error",
+        "check-file/filename-naming-convention": [
+            "error",
+            {
+              "src/components/*.{,tsx}": "PASCAL_CASE",
+              "src/constants/*.{,ts}": "CAMEL_CASE",
+              "src/pages/*.{,tsx}": "PASCAL_CASE",
+              "src/redux/*.{,ts}": "CAMEL_CASE",
+              "src/redux/slice/*.{,ts}": "CAMEL_CASE",
+              "src/styles/*.{,css}": "CAMEL_CASE",
+              "src/unitTests/*.{,.test.ts}": "CAMEL_CASE",
+              "src/utils/*.{,ts}": "CAMEL_CASE"
+            }
+          ],
+        "camelcase": "error",
         "etc/no-commented-out-code": "error",
         "no-inline-styles/no-inline-styles": 2,
         "react/function-component-definition": [2, { "namedComponents": "arrow-function" }],

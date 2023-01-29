@@ -28,7 +28,7 @@ const Habits = () => {
       addHabit({
         id: nanoid(16),
         name: addInputRef.current.value,
-        days: Array(28).fill(false),
+        days: Array(28).fill(false) as boolean[],
         editing: false,
       })
     )
