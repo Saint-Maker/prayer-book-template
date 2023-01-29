@@ -9,6 +9,7 @@ import {
 } from "@chakra-ui/react"
 import { BsTrashFill, BsPencil } from "react-icons/bs"
 import { useDispatch } from "react-redux"
+
 import { deletePrayer } from "../redux/slice/prayerSlice"
 import { AppDispatch } from "../redux/store"
 import AlertModal from "./AlertModal"

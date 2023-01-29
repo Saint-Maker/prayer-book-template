@@ -1,9 +1,9 @@
 import PrayerReducer from "./prayerSlice"
 import HabitReducer from "./habitSlice"
-import PWASlice from "./PWASlice"
+import pwaSlice from "./pwaSlice"
 
 export default {
   prayers: PrayerReducer,
   habits: HabitReducer,
-  pwa: PWASlice,
+  pwa: pwaSlice,
 }

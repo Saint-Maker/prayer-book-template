@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
+
 import idb from "../../utils/idb"
 import { getUpdatedHabits } from "../../utils/getUpdatedHabits"
 import { shouldUpdateHabits } from "../../utils/shouldUpdateHabits"

@@ -5,8 +5,7 @@ import { useSelector, useDispatch } from "react-redux"
 
 import Layout from "./components/Layout"
 import { selectPWA } from "./redux/store"
-import { setDeferredPrompt } from "./redux/slice/PWASlice"
-
+import { setDeferredPrompt } from "./redux/slice/pwaSlice"
 import type { AppDispatch } from "./redux/store"
 
 const App = (): JSX.Element => {
