@@ -1,2 +1,4 @@
 *.d.ts
 public/**
+yarn.lock
+.husky/

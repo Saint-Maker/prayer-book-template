@@ -147,7 +147,6 @@ const Prayer = () => {
         })
         dispatch(setPrayers(purifiedResult))
       } catch (e) {
-        console.log('testing husky')
         onInvalidFileAlertOpen()
       } finally {
         event.target.value = ""
