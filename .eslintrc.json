@@ -40,7 +40,7 @@
         "etc"
     ],
     "rules": {
-        "custom-rules/enforce-absolute-imports.rule": ["error",{
+        "custom-rules/prefer-alias-imports.rule": ["error",{
             "deprecatedPaths": [
                 "components/",
                 "constants/",

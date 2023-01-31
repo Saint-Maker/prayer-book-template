@@ -31,7 +31,7 @@ module.exports = {
 
               report({
                 node,
-                message: `Relative imports are not allowed. Use path alias\' instead.`,
+                message: `Alias imports are preferred.`,
                 fix: function(fixer) {
                   return fixer.replaceText(node.source, `'${newPath}'`)
                 }
