@@ -4,11 +4,11 @@ import { useEffect, useRef } from "react"
 import { AiOutlinePlusCircle } from "react-icons/ai"
 import { useDispatch, useSelector } from "react-redux"
 
-import { Habit } from "../components/Habit"
-import Header from "../components/Header"
-import Layout from "../components/Layout"
-import { addHabit, getHabits } from "../redux/slice/habitSlice"
-import { AppDispatch, selectHabits } from "../redux/store"
+import { addHabit, getHabits } from "~slices/habitSlice"
+import { AppDispatch, selectHabits } from "~store"
+import { Habit } from "~components/Habit"
+import Header from "~components/Header"
+import Layout from "~components/Layout"
 
 const Habits = () => {
   const dispatch = useDispatch<AppDispatch>()

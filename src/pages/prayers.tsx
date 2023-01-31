@@ -15,21 +15,21 @@ import { AiOutlinePlusCircle } from "react-icons/ai"
 import { BsDownload, BsTrashFill, BsUpload } from "react-icons/bs"
 import DOMPurify from "dompurify"
 
-import { selectPrayers } from "../redux/store"
+import { selectPrayers } from "~store"
 import {
   getPrayers,
   addPrayer,
   editPrayer,
   setPrayers,
   deleteAllPrayer,
-} from "../redux/slice/prayerSlice"
-import PrayerCard from "../components/PrayerCard"
-import Layout from "../components/Layout"
-import type { AppDispatch } from "../redux/store"
+} from "~slices/prayerSlice"
+import type { AppDispatch } from "~store"
+import PrayerCard from "~components/PrayerCard"
+import Layout from "~components/Layout"
 import "react-quill/dist/quill.snow.css"
-import "../styles/pagesPrayers.css"
-import Header from "../components/Header"
-import AlertModal from "../components/AlertModal"
+import "~styles/pagesPrayers.css"
+import Header from "~components/Header"
+import AlertModal from "~components/AlertModal"
 
 const Prayer = () => {
   const {

@@ -6,6 +6,14 @@
     "settings": {
         "react": {
             "version": "detect"
+        },
+        "import/parsers": {
+            "@typescript-eslint/parser": [".ts", ".tsx"]
+        },
+        "import/resolver": {
+            "typescript": {
+                "alwaysTryTypes": true
+            }
         }
     },
     "parser": "@typescript-eslint/parser",
@@ -20,7 +28,8 @@
         "plugin:react/recommended",
         "google",
         "plugin:react/jsx-runtime",
-        "prettier"
+        "prettier",
+        "plugin:custom-rules/all"
     ],
     "plugins": [
         "react",
@@ -31,13 +40,33 @@
         "etc"
     ],
     "rules": {
+        "custom-rules/enforce-absolute-imports.rule": ["error",{
+            "deprecatedPaths": [
+                "components/",
+                "constants/",
+                "pages/",
+                "redux/slice/",
+                "redux/store",
+                "styles/",
+                "utils/"
+            ],
+            "newPaths": [
+                "~components/",
+                "~constants/",
+                "~pages/",
+                "~slices/",
+                "~store",
+                "~styles/",
+                "~utils/"
+            ]
+        }],
         "import/order": [
             "error",
             {
                 "newlines-between": "always",
               "groups": [
                 "external",
-                "internal"
+                ["internal", "unknown"]
               ]
             }
           ],

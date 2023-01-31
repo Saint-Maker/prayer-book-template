@@ -5,11 +5,12 @@ import { Provider } from "react-redux"
 import { registerSW } from "virtual:pwa-register"
 import { AnimatePresence } from "framer-motion"
 
-import store from "./redux/store"
+import store from "~store"
+import Prayers from "~pages/Prayers"
+import Habits from "~pages/Habits"
+
 import theme from "./theme"
 import App from "./App"
-import Prayers from "./pages/Prayers"
-import Habits from "./pages/Habits"
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <>

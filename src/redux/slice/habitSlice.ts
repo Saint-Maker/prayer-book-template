@@ -1,8 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 
-import idb from "../../utils/idb"
-import { getUpdatedHabits } from "../../utils/getUpdatedHabits"
-import { shouldUpdateHabits } from "../../utils/shouldUpdateHabits"
+import idb from "~utils/idb"
+import { getUpdatedHabits } from "~utils/getUpdatedHabits"
+import { shouldUpdateHabits } from "~utils/shouldUpdateHabits"
 
 export const getHabits = createAsyncThunk("habit/getHabits", async () => {
   let data = ((await idb.readData("habits")) || []) as Habit[]

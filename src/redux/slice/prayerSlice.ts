@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 
-import idb from "../../utils/idb"
+import idb from "~utils/idb"
 
 export const getPrayers = createAsyncThunk("prayer/getPrayers", async () => {
   return idb.readData("prayers")

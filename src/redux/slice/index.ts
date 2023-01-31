@@ -1,6 +1,6 @@
-import PrayerReducer from "./prayerSlice"
-import HabitReducer from "./habitSlice"
-import pwaSlice from "./pwaSlice"
+import PrayerReducer from "~slices/prayerSlice"
+import HabitReducer from "~slices/habitSlice"
+import pwaSlice from "~slices/pwaSlice"
 
 export default {
   prayers: PrayerReducer,

@@ -3,8 +3,8 @@ import { useDispatch } from "react-redux"
 import { motion, isValidMotionProp } from "framer-motion"
 import { chakra } from "@chakra-ui/react"
 
-import type { AppDispatch } from "../redux/store"
-import { setDeferredPrompt } from "../redux/slice/pwaSlice"
+import type { AppDispatch } from "~store"
+import { setDeferredPrompt } from "~slices/pwaSlice"
 
 type Props = {
   children: React.ReactNode

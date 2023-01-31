@@ -3,10 +3,10 @@ import { Button, Heading, VStack } from "@chakra-ui/react"
 import { useNavigate } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 
-import Layout from "./components/Layout"
-import { selectPWA } from "./redux/store"
-import { setDeferredPrompt } from "./redux/slice/pwaSlice"
-import type { AppDispatch } from "./redux/store"
+import { selectPWA } from "~store"
+import { setDeferredPrompt } from "~slices/pwaSlice"
+import type { AppDispatch } from "~store"
+import Layout from "~components/Layout"
 
 const App = (): JSX.Element => {
   const pwa = useSelector(selectPWA)

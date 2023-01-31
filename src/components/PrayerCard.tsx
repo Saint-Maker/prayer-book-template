@@ -10,9 +10,9 @@ import {
 import { BsTrashFill, BsPencil } from "react-icons/bs"
 import { useDispatch } from "react-redux"
 
-import { deletePrayer } from "../redux/slice/prayerSlice"
-import { AppDispatch } from "../redux/store"
-import AlertModal from "./AlertModal"
+import { deletePrayer } from "~slices/prayerSlice"
+import { AppDispatch } from "~store"
+import AlertModal from "~components/AlertModal"
 
 type Props = {
   id: string

@@ -10,12 +10,22 @@
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "module": "ESNext",
-    "moduleResolution": "Node",
+    "moduleResolution": "node",
     "resolveJsonModule": true,
     "strictNullChecks": true,
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
+    "baseUrl": "src",
+    "paths": {
+      "~components/*": ["components/*"],
+      "~constants/*": ["constants/*"],
+      "~pages/*": ["pages/*"],
+      "~slices/*": ["redux/slice/*"],
+      "~store": ["redux/store"],
+      "~styles/*": ["styles/*"],
+      "~utils/*": ["utils/*"]
+    },
     "types": ["vite/client", "vite-plugin-pwa/client"]
   },
   "include": ["src"],

@@ -1,8 +1,8 @@
-import { DAYS_IN_WEEK } from "../constants/habits"
-import { HABITS_LATEST_WEEKS_START_DATE } from "../constants/lsKeys"
-import { getDateDifference } from "./getDateDifference"
-import { getTodaysMostRecentSunday } from "./getTodaysMostRecentSunday"
-import { lsSet } from "./localStorage"
+import { DAYS_IN_WEEK } from "~constants/habits"
+import { HABITS_LATEST_WEEKS_START_DATE } from "~constants/lsKeys"
+import { getDateDifference } from "~utils/getDateDifference"
+import { getTodaysMostRecentSunday } from "~utils/getTodaysMostRecentSunday"
+import { lsSet } from "~utils/localStorage"
 
 export const getUpdatedHabits = (habits: Habit[]) => {
   const updatedHabits = habits.map((habit: Habit) =>
