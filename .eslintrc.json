@@ -41,24 +41,7 @@
     ],
     "rules": {
         "custom-rules/prefer-alias-imports.rule": ["error",{
-            "deprecatedPaths": [
-                "components/",
-                "constants/",
-                "pages/",
-                "redux/slice/",
-                "redux/store",
-                "styles/",
-                "utils/"
-            ],
-            "newPaths": [
-                "~components/",
-                "~constants/",
-                "~pages/",
-                "~slices/",
-                "~store",
-                "~styles/",
-                "~utils/"
-            ]
+            "autoFetchPaths": true
         }],
         "import/order": [
             "error",
