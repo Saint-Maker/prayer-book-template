@@ -10,7 +10,7 @@
     "predeploy": "yarn build",
     "deploy": "gh-pages -d build",
     "test": "vitest --reporter verbose",
-    "format": "prettier --write --no-semi .",
+    "format": "prettier --config=./prettierrc.json --write .",
     "lint": "eslint . --ext .ts,.tsx --fix",
     "folderslint": "folderslint",
     "prepare": "husky install"

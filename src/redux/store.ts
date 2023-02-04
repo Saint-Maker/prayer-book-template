@@ -1,9 +1,9 @@
-import { configureStore } from "@reduxjs/toolkit"
+import { configureStore } from '@reduxjs/toolkit'
 
-import slice from "./slice"
+import slice from './slice'
 
 const store = configureStore({
-  reducer: slice,
+    reducer: slice,
 })
 
 type RootState = ReturnType<typeof store.getState>
