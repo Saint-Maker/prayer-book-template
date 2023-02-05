@@ -5,12 +5,12 @@ import { Provider } from 'react-redux'
 import { registerSW } from 'virtual:pwa-register'
 import { AnimatePresence } from 'framer-motion'
 
-import store from '~store'
-import Prayers from '~pages/Prayers'
-import Habits from '~pages/Habits'
+import { store } from '~store'
+import { Prayer } from '~pages/Prayers'
+import { Habits } from '~pages/Habits'
 
-import theme from './theme'
-import App from './App'
+import { theme } from './theme'
+import { App } from './App'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <>
@@ -21,7 +21,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
                     <Router>
                         <Routes>
                             <Route path="/" element={<App />} />
-                            <Route path="/prayers" element={<Prayers />} />
+                            <Route path="/prayers" element={<Prayer />} />
                             <Route path="/habits" element={<Habits />} />
                         </Routes>
                     </Router>

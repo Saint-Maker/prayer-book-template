@@ -7,10 +7,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { addHabit, getHabits } from '~slices/habitSlice'
 import { AppDispatch, selectHabits } from '~store'
 import { Habit } from '~components/Habit'
-import Header from '~components/Header'
-import Layout from '~components/Layout'
+import { Header } from '~components/Header'
+import { Layout } from '~components/Layout'
 
-const Habits = () => {
+export const Habits = () => {
     const dispatch = useDispatch<AppDispatch>()
     const habits = useSelector(selectHabits)
     const addInputRef = useRef<HTMLInputElement | null>(null)
@@ -51,5 +51,3 @@ const Habits = () => {
         </Layout>
     )
 }
-
-export default Habits

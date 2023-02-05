@@ -10,14 +10,14 @@ import DOMPurify from 'dompurify'
 import { selectPrayers } from '~store'
 import { getPrayers, addPrayer, editPrayer, setPrayers, deleteAllPrayer } from '~slices/prayerSlice'
 import type { AppDispatch } from '~store'
-import PrayerCard from '~components/PrayerCard'
-import Layout from '~components/Layout'
+import { PrayerCard } from '~components/PrayerCard'
+import { Layout } from '~components/Layout'
 import 'react-quill/dist/quill.snow.css'
 import '~styles/pagesPrayers.css'
-import Header from '~components/Header'
-import AlertModal from '~components/AlertModal'
+import { Header } from '~components/Header'
+import { AlertModal } from '~components/AlertModal'
 
-const Prayer = () => {
+export const Prayer = () => {
     const { isOpen: isDeleteAlertOpen, onOpen: onDeleteAlertOpen, onClose: onDeleteAlertClose } = useDisclosure()
     const { isOpen: isUploadAlertOpen, onOpen: onUploadAlertOpen, onClose: onUploadAlertClose } = useDisclosure()
     const {
@@ -238,5 +238,3 @@ const Prayer = () => {
         </Layout>
     )
 }
-
-export default Prayer

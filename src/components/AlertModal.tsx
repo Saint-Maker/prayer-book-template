@@ -21,7 +21,7 @@ interface Props {
     confirmBtnColor?: string
 }
 
-const AlertModal = ({
+export const AlertModal = ({
     header,
     body,
     cancelBtnText = 'Cancel',
@@ -61,5 +61,3 @@ const AlertModal = ({
         </AlertDialog>
     )
 }
-
-export default AlertModal

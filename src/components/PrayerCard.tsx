@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 
 import { deletePrayer } from '~slices/prayerSlice'
 import { AppDispatch } from '~store'
-import AlertModal from '~components/AlertModal'
+import { AlertModal } from '~components/AlertModal'
 
 type Props = {
     id: string
@@ -13,7 +13,7 @@ type Props = {
     onEdit: () => void
 }
 
-const PrayerCard = ({ id, title, text, onEdit }: Props) => {
+export const PrayerCard = ({ id, title, text, onEdit }: Props) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const bg = useColorModeValue('gray.100', 'gray.700')
     const dispatch = useDispatch<AppDispatch>()
@@ -69,5 +69,3 @@ const PrayerCard = ({ id, title, text, onEdit }: Props) => {
         </Box>
     )
 }
-
-export default PrayerCard

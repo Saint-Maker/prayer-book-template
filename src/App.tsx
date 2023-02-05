@@ -6,9 +6,9 @@ import { useSelector, useDispatch } from 'react-redux'
 import { selectPWA } from '~store'
 import { setDeferredPrompt } from '~slices/pwaSlice'
 import type { AppDispatch } from '~store'
-import Layout from '~components/Layout'
+import { Layout } from '~components/Layout'
 
-const App = (): JSX.Element => {
+export const App = (): JSX.Element => {
     const pwa = useSelector(selectPWA)
     const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
@@ -50,5 +50,3 @@ const App = (): JSX.Element => {
         </Layout>
     )
 }
-
-export default App

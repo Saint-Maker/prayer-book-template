@@ -27,7 +27,7 @@ type Props = {
     drawerBtns?: ReactNode
 }
 
-const Header = ({ children, title, headerBtns, drawerBtns }: Props) => {
+export const Header = ({ children, title, headerBtns, drawerBtns }: Props) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
 
     const { colorMode, toggleColorMode } = useColorMode()
@@ -97,5 +97,3 @@ const Header = ({ children, title, headerBtns, drawerBtns }: Props) => {
         </>
     )
 }
-
-export default Header

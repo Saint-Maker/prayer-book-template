@@ -10,7 +10,7 @@ type Props = {
     children: React.ReactNode
 }
 
-const Layout = ({ children }: Props) => {
+export const Layout = ({ children }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
 
     useEffect(() => {
@@ -45,5 +45,3 @@ const thisVariant = {
         opacity: 0,
     },
 }
-
-export default Layout

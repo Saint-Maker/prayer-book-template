@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit'
 
-import slice from './slice'
+import { slices } from './slice'
 
-const store = configureStore({
-    reducer: slice,
+export const store = configureStore({
+    reducer: slices,
 })
 
 type RootState = ReturnType<typeof store.getState>
@@ -11,6 +11,5 @@ type RootState = ReturnType<typeof store.getState>
 export const selectPrayers = (state: RootState) => state.prayers
 export const selectHabits = (state: RootState) => state.habits
 export const selectPWA = (state: RootState) => state.pwa
-export default store
 
 export type AppDispatch = typeof store.dispatch

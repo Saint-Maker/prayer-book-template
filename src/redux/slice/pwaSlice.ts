@@ -19,4 +19,4 @@ const pwaSlice = createSlice({
 })
 
 export const { setDeferredPrompt } = pwaSlice.actions
-export default pwaSlice.reducer
+export const { reducer } = pwaSlice
