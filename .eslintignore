@@ -1,0 +1,6 @@
+*.d.ts
+public/**
+yarn.lock
+.husky/
+custom-rules/*
+vite.config.ts

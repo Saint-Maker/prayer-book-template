@@ -9,7 +9,11 @@
     "https-preview": "serve dist",
     "predeploy": "yarn build",
     "deploy": "gh-pages -d build",
-    "test": "vitest --reporter verbose"
+    "test": "vitest --reporter verbose",
+    "format": "prettier --config=./prettierrc.json --write .",
+    "lint": "eslint . --ext .ts,.tsx --fix",
+    "folderslint": "folderslint",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@chakra-ui/react": "^2.2.1",
@@ -19,7 +23,6 @@
     "date-fns": "^2.29.3",
     "dompurify": "^2.4.3",
     "framer-motion": "^6",
-    "gh-pages": "^4.0.0",
     "localforage": "^1.10.0",
     "nanoid": "^4.0.0",
     "react": "^18.0.0",
@@ -27,9 +30,7 @@
     "react-icons": "^4.4.0",
     "react-quill": "^2.0.0",
     "react-redux": "^8.0.2",
-    "react-router-dom": "6",
-    "react-textarea-autosize": "^8.3.4",
-    "save-dev": "^0.0.1-security"
+    "react-router-dom": "6"
   },
   "devDependencies": {
     "@types/dompurify": "^2.4.0",
@@ -40,9 +41,21 @@
     "@vitejs/plugin-react": "^1.3.0",
     "eslint": ">=5.16.0",
     "eslint-config-google": "^0.14.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-import-resolver-typescript": "^3.5.3",
+    "eslint-plugin-check-file": "^1.3.1",
+    "eslint-plugin-custom-rules": "file:./custom-rules",
+    "eslint-plugin-etc": "^2.0.2",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-no-inline-styles": "^1.0.5",
     "eslint-plugin-react": "^7.30.0",
+    "folderslint": "^1.2.0",
     "https-localhost": "^4.7.1",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.1.0",
+    "prettier": "2.8.3",
     "typescript": "^4.6.3",
+    "unimported": "^1.24.0",
     "vite": "^2.9.9",
     "vite-plugin-pwa": "^0.12.0",
     "vitest": "^0.26.3"

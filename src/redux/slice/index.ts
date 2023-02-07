@@ -1,9 +1,9 @@
-import PrayerReducer from './prayerSlice';
-import HabitReducer from './habitSlice';
-import PWASlice from './PWASlice';
+import { reducer as PrayerReducer } from '~slices/prayerSlice'
+import { reducer as HabitReducer } from '~slices/habitSlice'
+import { reducer as pwaSlice } from '~slices/pwaSlice'
 
-export default {
-  prayers: PrayerReducer,
-  habits: HabitReducer,
-  pwa: PWASlice,
-};
+export const slices = {
+    prayers: PrayerReducer,
+    habits: HabitReducer,
+    pwa: pwaSlice,
+}
