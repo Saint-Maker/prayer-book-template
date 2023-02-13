@@ -4,9 +4,13 @@
     "components/*",
     "constants",
     "pages/*",
-    "redux/*/slice",
+    "redux",
+    "redux/slice",
     "styles",
-    "tests/utils/*",
-    "utils/*"
+    "tests",
+    "tests/utils",
+    "tests/utils/habits",
+    "utils",
+    "utils/habits"
    ]
 }
