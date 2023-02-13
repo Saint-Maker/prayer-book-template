@@ -147,11 +147,14 @@ https://saintmaker.canny.io/quest-board/p/set-up-testing-standards
 2/4/23
 - Move in-depth coding standard breakdown into this readme
 
+2/12/13
+- update husky to test code coverage on commit (just checks the code coverage of the utils folder for now)
+- fix eslint linebreak system to work regardless of windows or linux
+
 Backlog
 - ensure that past habit data (when a habit is made) is not marked in red
 - figure out text truncation for habit titles
 - handle habit editing locally instead of in state
-- fix eslint linebreak system to work regardless of windows or linux
 - determine PR standards and create github PR template
 
 </p>

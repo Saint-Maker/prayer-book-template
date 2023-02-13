@@ -47,6 +47,10 @@ export const Habit = ({ habit }: HabitProps) => {
         dispatch(editHabits(updatedHabits))
     }
 
+    const getWeekdayHighlightColor = (habit: Habit, dayIndex: number, currentDay: number) => {
+        return habit.days[dayIndex] ? 'green' : !habit.days[dayIndex] && currentDay <= dayIndex ? 'gray' : 'red'
+    }
+
     return (
         <Box pt="2">
             <Box borderWidth="1px" borderRadius="lg" overflow="hidden" py="2">
@@ -95,16 +99,10 @@ export const Habit = ({ habit }: HabitProps) => {
                             {weekdays.map((value, index) => {
                                 const dayIndex = index + weekSelected * DAYS_IN_WEEK
                                 const currentDay = new Date().getDay() + 21
+                                const colorScheme = getWeekdayHighlightColor(habit, dayIndex, currentDay)
                                 return (
                                     <IconButton
-                                        // TODO: figure out how to bring the logic from the colorScheme into a function without breaking the typing from chakra
-                                        colorScheme={
-                                            habit.days[dayIndex]
-                                                ? 'green'
-                                                : !habit.days[dayIndex] && currentDay <= dayIndex
-                                                ? 'gray'
-                                                : 'red'
-                                        }
+                                        colorScheme={colorScheme}
                                         key={`${habit.name}-days-${dayIndex}`}
                                         onClick={() => toggleHabitForDay(habit, dayIndex)}
                                         variant={habit.days[dayIndex] ? 'solid' : 'outline'}
