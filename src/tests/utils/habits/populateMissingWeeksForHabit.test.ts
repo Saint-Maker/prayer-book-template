@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
 import { DAYS_IN_WEEK } from '~constants/habits'
-import { populateMissingWeeksForHabit } from '~utils/getUpdatedHabits'
+import { populateMissingWeeksForHabit } from '~utils/habits/populateMissingWeeksForHabit'
 
 const defaultData = [
     true,

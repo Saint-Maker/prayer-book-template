@@ -4,3 +4,5 @@ yarn.lock
 .husky/
 custom-rules/*
 vite.config.ts
+vitest.config.ts
+*.test.ts
