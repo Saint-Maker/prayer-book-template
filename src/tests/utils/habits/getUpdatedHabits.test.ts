@@ -1,22 +1,33 @@
 import { describe, expect, it, vi } from 'vitest'
+import { getUpdatedHabits } from '~utils/habits/getUpdatedHabits'
+import * as populateMissingWeeksForHabitModule from '~utils/habits/populateMissingWeeksForHabit'
+import { ls } from '~utils/localStorage'
 
 import * as getDateDifferenceModule from '../../../utils/habits/getDateDifference'
-import { shouldUpdateHabits } from '../../../utils/habits/shouldUpdateHabits'
 
-describe('shouldUpdateHabits', () => {
-    it('If date difference is less then 6 return false', () => {
-        const spy = vi.spyOn(getDateDifferenceModule, 'getDateDifference')
-        spy.mockImplementationOnce(() => 5)
+describe('getUpdatedHabits', () => {
+    it('Returns habits provided by populateMissingWeeksForHabit function', () => {
+        const spyGetDateDifference = vi.spyOn(getDateDifferenceModule, 'getDateDifference')
+        spyGetDateDifference.mockImplementationOnce(() => 5)
 
-        const result = shouldUpdateHabits()
-        expect(result).toStrictEqual(false)
-    })
+        const spyPopulateMissingWeeksForHabit = vi.spyOn(
+            populateMissingWeeksForHabitModule,
+            'populateMissingWeeksForHabit',
+        )
+        const habit = {
+            id: '123',
+            name: 'exercise',
+            days: Array(28).fill(false),
+            editing: false,
+        }
+        spyPopulateMissingWeeksForHabit.mockImplementationOnce(() => habit)
 
-    it('If date difference is greater then 6 return true', () => {
-        const spy = vi.spyOn(getDateDifferenceModule, 'getDateDifference')
-        spy.mockImplementationOnce(() => 7)
+        const spySet = vi.spyOn(ls, 'set')
+        spySet.mockImplementationOnce(() => undefined)
 
-        const result = shouldUpdateHabits()
-        expect(result).toStrictEqual(true)
+        const habits = [habit]
+
+        const result = getUpdatedHabits(habits)
+        expect(result).toStrictEqual(habits)
     })
 })
