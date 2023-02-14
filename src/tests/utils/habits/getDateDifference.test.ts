@@ -6,7 +6,7 @@ import * as getLastRecordedSundayModule from '~utils/habits/getLastRecordedSunda
 const cases = [0, 1, 2, 3, 4, 5, 6, 7, 8]
 
 describe('getDateDifference', () => {
-    test.each(cases)('When todays date is %i day after lastRecordSunday difference is %i', (additionalDays) => {
+    test.each(cases)('When todays date is %i day after lastRecordSunday and the day difference', (additionalDays) => {
         const lastRecordedSunday = new Date()
         const spy = vi.spyOn(getLastRecordedSundayModule, 'getLastRecordedSunday')
         spy.mockImplementationOnce(() => lastRecordedSunday)

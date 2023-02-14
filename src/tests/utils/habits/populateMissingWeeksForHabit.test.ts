@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest'
+import { test, describe, expect, it } from 'vitest'
 
 import { DAYS_IN_WEEK } from '~constants/habits'
 import { populateMissingWeeksForHabit } from '~utils/habits/populateMissingWeeksForHabit'
@@ -34,6 +34,103 @@ const defaultData = [
     true,
 ]
 
+const emptyWeek = Array(28).fill(false)
+
+const expectedData = [
+    [
+        true,
+        false,
+        false,
+        false,
+        true,
+        true,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+    ],
+    [
+        false,
+        true,
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+    ],
+    [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+    ],
+    emptyWeek,
+    emptyWeek,
+]
+
 const inputData: Habit = {
     id: '0',
     name: 'exercise',
@@ -51,185 +148,17 @@ const getExpectedResult = (expectedData: boolean[]) => {
     return expectedResult
 }
 
+const cases = [1, 2, 3, 4, 5]
+
 describe('populateMissingWeeksForHabit', () => {
     it('User checks 4 week of random habit data within the same week the habit was created', () => {
         const daysLater = 1
         const result = populateMissingWeeksForHabit(daysLater, inputData)
         expect(result).toStrictEqual(getExpectedResult(defaultData))
     })
-    it('User checks 4 week of random habit data 1 week later', () => {
-        const expectedData = [
-            true,
-            false,
-            false,
-            false,
-            true,
-            true,
-            false,
-            false,
-            true,
-            false,
-            false,
-            false,
-            true,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            true,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-        ]
-        const daysLater = DAYS_IN_WEEK
+    test.each(cases)('User checks 4 week of random habit data %i week(s) later', (weeksLater) => {
+        const daysLater = DAYS_IN_WEEK * weeksLater
         const result = populateMissingWeeksForHabit(daysLater, inputData)
-        expect(result).toStrictEqual(getExpectedResult(expectedData))
-    })
-    it('User checks 4 week of random habit data 2 week later', () => {
-        const expectedData = [
-            false,
-            true,
-            false,
-            false,
-            false,
-            true,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            true,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-        ]
-        const daysLater = DAYS_IN_WEEK * 2
-        const result = populateMissingWeeksForHabit(daysLater, inputData)
-        expect(result).toStrictEqual(getExpectedResult(expectedData))
-    })
-    it('User checks 4 week of random habit data 3 week later', () => {
-        const expectedData = [
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            true,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-        ]
-        const daysLater = DAYS_IN_WEEK * 3
-        const result = populateMissingWeeksForHabit(daysLater, inputData)
-        expect(result).toStrictEqual(getExpectedResult(expectedData))
-    })
-    it('User checks 4 week of random habit data 4 week later', () => {
-        const expectedData = [
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-        ]
-        const daysLater = DAYS_IN_WEEK * 4
-        const result = populateMissingWeeksForHabit(daysLater, inputData)
-        expect(result).toStrictEqual(getExpectedResult(expectedData))
-    })
-    it('User checks 4 week of random habit data 5 week later', () => {
-        const expectedData = [
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-        ]
-        const daysLater = DAYS_IN_WEEK * 5
-        const result = populateMissingWeeksForHabit(daysLater, inputData)
-        expect(result).toStrictEqual(getExpectedResult(expectedData))
+        expect(result).toStrictEqual(getExpectedResult(expectedData[weeksLater - 1]))
     })
 })
