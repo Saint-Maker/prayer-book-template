@@ -41,7 +41,7 @@ Krysztof: I pulled the bulk of the coding standards from this guide by [jondjone
 - (automated) Treat props as read-only. Do not try to modify them.
 
 ## Architecture & Clean Code
-- (manual) No DRY violations. Create utility files to avoid duplicate code.
+- (automated) No DRY violations. Create utility files to avoid duplicate code.
 - (dropped) Follow the component/presentation pattern where appropriate. Components should follow the single responsibility principle
 - (dropped) Use Higher Order Components where appropriate
 - (manual) Split code into respective files, JavaScript, test, and CSS
@@ -88,8 +88,15 @@ Krysztof: I pulled the bulk of the coding standards from this guide by [jondjone
 <details><summary>Testing Standards</summary>
 <p>
 
-Work in progress:
-https://saintmaker.canny.io/quest-board/p/set-up-testing-standards
+We use the running of yarn coverage to, for now, ensure that the utils folder is at a 100% code coverage (lines, functions, branches, and statements). This forces us to write tests and sets a quality benchmark for our testing
+
+## Testing
+- (kinda automated) Write tests
+- (automated) Define a quality gate using coveralls
+- (manual) Don't test more than one thing in a test
+- (manual) No logic should exist within your test code
+- (dropped) Test classes only test one class
+- (manual) Code that needs to talk to a network, or, database is mocked
 
 </p>
 </details>
@@ -147,9 +154,12 @@ https://saintmaker.canny.io/quest-board/p/set-up-testing-standards
 2/4/23
 - Move in-depth coding standard breakdown into this readme
 
-2/12/13
+2/12/23
 - update husky to test code coverage on commit (just checks the code coverage of the utils folder for now)
 - fix eslint linebreak system to work regardless of windows or linux
+
+2/13/23
+- integrate jscpd to keep the code dry
 
 Backlog
 - ensure that past habit data (when a habit is made) is not marked in red
