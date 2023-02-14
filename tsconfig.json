@@ -28,6 +28,6 @@
     },
     "types": ["vite/client", "vite-plugin-pwa/client"]
   },
-  "include": ["src", "./getGeneratedAliases.ts"],
+  "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
