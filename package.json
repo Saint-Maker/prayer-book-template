@@ -10,10 +10,13 @@
     "predeploy": "yarn build",
     "deploy": "gh-pages -d build",
     "test": "vitest --reporter verbose",
+    "coverage": "vitest --coverage",
     "format": "prettier --config=./prettierrc.json --write .",
     "lint": "eslint . --ext .ts,.tsx --fix",
     "folderslint": "folderslint",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "dry-test": "jscpd ./src --threshold=1",
+    "generate-dry-report": "jscpd ./src --reporters=html"
   },
   "dependencies": {
     "@chakra-ui/react": "^2.2.1",
@@ -39,6 +42,8 @@
     "@typescript-eslint/eslint-plugin": "^5.28.0",
     "@typescript-eslint/parser": "^5.28.0",
     "@vitejs/plugin-react": "^1.3.0",
+    "@vitest/coverage-c8": "^0.28.4",
+    "@vitest/coverage-istanbul": "^0.28.4",
     "eslint": ">=5.16.0",
     "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^8.6.0",
@@ -52,6 +57,7 @@
     "folderslint": "^1.2.0",
     "https-localhost": "^4.7.1",
     "husky": "^8.0.3",
+    "jscpd": "^3.5.3",
     "lint-staged": "^13.1.0",
     "prettier": "2.8.3",
     "typescript": "^4.6.3",

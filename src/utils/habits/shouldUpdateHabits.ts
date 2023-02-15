@@ -1,4 +1,4 @@
-import { getDateDifference } from '~utils/getDateDifference'
+import { getDateDifference } from '~utils/habits/getDateDifference'
 
 export const shouldUpdateHabits = () => {
     const dateDifference = getDateDifference()

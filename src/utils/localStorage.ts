@@ -1,7 +1,8 @@
-export const lsSet = (key: string, item: string) => {
-    localStorage.setItem(key, item)
-}
-
-export const lsGet = (key: string) => {
-    return localStorage.getItem(key)
+export const ls = {
+    set: (key: string, item: string): void => {
+        localStorage.setItem(key, item)
+    },
+    get: (key: string): string | null => {
+        return localStorage.getItem(key)
+    },
 }
