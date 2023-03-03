@@ -38,6 +38,12 @@ export const App = (): JSX.Element => {
                 <Button onClick={gotoHabits} w="full">
                     Habits
                 </Button>
+                <a href="https://earnest-sprinkles-99123f.netlify.app/">
+                    <Button w="full">Test mod</Button>
+                </a>
+                <a href="https://www.google.com/">
+                    <Button w="full">Test web</Button>
+                </a>
                 <Button
                     onClick={void installHandler}
                     display={pwa.deferredPrompt ? 'block' : 'none'}
