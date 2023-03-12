@@ -33,9 +33,6 @@ export const Header = ({ children, title, headerBtns, drawerBtns }: Props) => {
     const { colorMode, toggleColorMode } = useColorMode()
     const btnRef = useRef<HTMLButtonElement>(null)
     const navigate = useNavigate()
-    const gotoHome = () => navigate('/')
-    const gotoPrayers = () => navigate('/prayers')
-    const gotoHabits = () => navigate('/habits')
 
     return (
         <>
@@ -58,13 +55,18 @@ export const Header = ({ children, title, headerBtns, drawerBtns }: Props) => {
                 <DrawerContent>
                     <DrawerCloseButton />
                     <DrawerHeader>Menu</DrawerHeader>
-                    <DrawerBody display="flex" experimental_spaceY={2}>
+                    <DrawerBody display="flex">
                         <Flex display="flex" direction="column" gap="2" width="100%">
-                            <Button onClick={gotoHome} w="full" leftIcon={<AiFillHome />} justifyContent="flex-start">
+                            <Button
+                                onClick={() => navigate('/')}
+                                w="full"
+                                leftIcon={<AiFillHome />}
+                                justifyContent="flex-start"
+                            >
                                 Home
                             </Button>
                             <Button
-                                onClick={gotoPrayers}
+                                onClick={() => navigate('/prayers')}
                                 disabled={window.location.pathname === '/prayers'}
                                 w="full"
                                 leftIcon={<GiPrayer />}
@@ -73,13 +75,22 @@ export const Header = ({ children, title, headerBtns, drawerBtns }: Props) => {
                                 Prayer Book
                             </Button>
                             <Button
-                                onClick={gotoHabits}
+                                onClick={() => navigate('/habits')}
                                 disabled={window.location.pathname === '/habits'}
                                 w="full"
                                 leftIcon={<BsListUl />}
                                 justifyContent="flex-start"
                             >
                                 Habits
+                            </Button>
+                            <Button
+                                onClick={() => navigate('/mods')}
+                                disabled={window.location.pathname === '/mods'}
+                                w="full"
+                                leftIcon={<BsListUl />}
+                                justifyContent="flex-start"
+                            >
+                                Select a Mod
                             </Button>
                             <Button
                                 onClick={toggleColorMode}

@@ -161,7 +161,15 @@ We use the running of yarn coverage to, for now, ensure that the utils folder is
 2/13/23
 - integrate jscpd to keep the code dry
 
+3/12/23
+- Setup draft of mod select page
+- Update Chakra UI
+
 Backlog
+- move "selected mod" list into indexDB
+- add "issuesPageLink" to ModDetails
+- wire up mod selection and removal functionality
+- add eslint rule for unused imports
 - ensure that past habit data (when a habit is made) is not marked in red
 - figure out text truncation for habit titles
 - handle habit editing locally instead of in state

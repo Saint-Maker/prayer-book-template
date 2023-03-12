@@ -8,3 +8,5 @@ README.md
 .husky/*
 custom-rules/*
 dist/*
+coverage/*
+report/*

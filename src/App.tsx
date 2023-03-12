@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Button, Heading, VStack } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
@@ -12,9 +12,6 @@ export const App = (): JSX.Element => {
     const pwa = useSelector(selectPWA)
     const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
-
-    const gotoPrayers = () => navigate('/prayers')
-    const gotoHabits = () => navigate('/habits')
 
     const installHandler = async (e: React.MouseEvent<HTMLButtonElement>) => {
         if (pwa.deferredPrompt !== null) {
@@ -32,11 +29,14 @@ export const App = (): JSX.Element => {
                 Saint Maker
             </Heading>
             <VStack w="full">
-                <Button onClick={gotoPrayers} w="full">
+                <Button onClick={() => navigate('/prayers')} w="full">
                     Prayer Book
                 </Button>
-                <Button onClick={gotoHabits} w="full">
+                <Button onClick={() => navigate('/habits')} w="full">
                     Habits
+                </Button>
+                <Button onClick={() => navigate('/mods')} w="full">
+                    Add More
                 </Button>
                 <Button
                     onClick={void installHandler}
