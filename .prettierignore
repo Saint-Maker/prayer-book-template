@@ -10,3 +10,4 @@ custom-rules/*
 dist/*
 coverage/*
 report/*
+src/mods/*

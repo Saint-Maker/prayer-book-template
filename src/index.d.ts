@@ -11,6 +11,16 @@ interface Habit {
   editing: boolean
 }
 
+interface Mod {
+  id: string
+  name: string
+  isNative: boolean
+  path: string
+  description: string
+  inUse: boolean
+  issuesPageLink: string
+}
+
 interface BeforeInstallPromptEvent extends Event {
   readonly platforms: string[]
   readonly userChoice: Promise<{

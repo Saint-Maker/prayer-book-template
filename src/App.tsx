@@ -1,17 +1,24 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, Heading, VStack } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { selectPWA } from '~store'
+import { selectMods, selectPWA } from '~store'
 import { setDeferredPrompt } from '~slices/pwaSlice'
 import type { AppDispatch } from '~store'
 import { Layout } from '~components/Layout'
+import { getMods } from '~slices/modSlice'
+import { ModBtnLink } from '~components/ModBtnLink'
 
 export const App = (): JSX.Element => {
     const pwa = useSelector(selectPWA)
     const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
+    const mods = useSelector(selectMods)
+
+    useEffect(() => {
+        dispatch(getMods())
+    }, [])
 
     const installHandler = async (e: React.MouseEvent<HTMLButtonElement>) => {
         if (pwa.deferredPrompt !== null) {
@@ -29,12 +36,11 @@ export const App = (): JSX.Element => {
                 Saint Maker
             </Heading>
             <VStack w="full">
-                <Button onClick={() => navigate('/prayers')} w="full">
-                    Prayer Book
-                </Button>
-                <Button onClick={() => navigate('/habits')} w="full">
-                    Habits
-                </Button>
+                {mods.data
+                    .filter((mod: Mod) => mod.inUse === true)
+                    .map((mod: Mod, index: number) => (
+                        <ModBtnLink key={`${mod.name}-${index}`} mod={mod} btnText={mod.name} width="full" />
+                    ))}
                 <Button onClick={() => navigate('/mods')} w="full">
                     Add More
                 </Button>

@@ -1,89 +1,128 @@
-import { Text, Button, Card, CardBody, CardFooter, CardHeader, Flex, Heading } from '@chakra-ui/react'
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Button, Flex, Input, Text, VStack } from '@chakra-ui/react'
+import { nanoid } from 'nanoid'
+import { useEffect, useRef, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
+import { AlertModal } from '~components/AlertModal'
+import { AppCard } from '~components/AppCard'
 import { Header } from '~components/Header'
 import { Layout } from '~components/Layout'
-
-interface IModDetails {
-    name: string
-    isNative: boolean
-    path: string
-    description: string
-    inUse: boolean
-}
+import { ModBtnLink } from '~components/ModBtnLink'
+import { addMod, editMod, getMods } from '~slices/modSlice'
+import { AppDispatch, selectMods } from '~store'
 
 export const ModSelect = () => {
-    const navigate = useNavigate()
-    const [modList, setModList] = useState<IModDetails[]>([
-        {
-            name: 'Prayer Book',
-            isNative: true,
-            path: '/prayers',
-            description: 'A prayer book to store various prayers.',
-            inUse: true,
-        },
-        {
-            name: 'Habits',
-            isNative: true,
-            path: '/habits',
-            description:
-                'A basic habit tracker. Allows you to store 4 weeks of history on an unlimited amount of daily habits.',
-            inUse: true,
-        },
-        {
-            name: 'Examen',
-            isNative: false,
-            path: 'https://strong-narwhal-15f3cb.netlify.app/',
-            description: 'A basic examination of conscience application.',
-            inUse: false,
-        },
-    ])
+    const dispatch = useDispatch<AppDispatch>()
+    const mods = useSelector(selectMods)
+    const [isOpen, setIsOpen] = useState(false)
+    const nameRef = useRef<HTMLInputElement | null>(null)
+    const descriptionRef = useRef<HTMLInputElement | null>(null)
+    const urlRef = useRef<HTMLInputElement | null>(null)
+
+    useEffect(() => {
+        dispatch(getMods())
+    }, [])
+
+    const toggleModUsage = (mod: Mod) => {
+        dispatch(editMod({ ...mod, inUse: !mod.inUse }))
+    }
+
+    const addCustomMod = () => {
+        if (
+            nameRef?.current == undefined ||
+            nameRef.current.value.length === 0 ||
+            descriptionRef?.current == undefined ||
+            descriptionRef.current.value.length === 0 ||
+            urlRef?.current == undefined ||
+            urlRef.current.value.length === 0
+        )
+            return
+        dispatch(
+            addMod({
+                id: nanoid(16),
+                name: nameRef.current.value,
+                isNative: false,
+                path: urlRef.current.value,
+                description: descriptionRef.current.value,
+                inUse: true,
+                issuesPageLink: '',
+            }),
+        )
+        nameRef.current.value = ''
+        descriptionRef.current.value = ''
+        urlRef.current.value = ''
+    }
 
     return (
-        <Layout>
-            <Header title="Add an Application">
-                <Flex direction="column" pt="2" gap="2">
-                    {modList.map((mod: IModDetails, index) => (
-                        <Card align="center" key={`${mod.name}-${index}`}>
-                            <CardHeader>
-                                <Heading size="md">{mod.name}</Heading>
-                            </CardHeader>
-                            <CardBody>
-                                <Text>{mod.description}</Text>
-                            </CardBody>
-                            <CardFooter gap="2">
-                                {mod.isNative ? (
-                                    <Button onClick={() => navigate(mod.path)}>View here</Button>
-                                ) : (
-                                    <Button as="a" href={mod.path} target="_blank">
-                                        View here
-                                    </Button>
-                                )}
-                                {mod.inUse ? (
-                                    <Button variant="outline">Remove from home</Button>
-                                ) : (
-                                    <Button variant="outline">Add to home</Button>
-                                )}
-                            </CardFooter>
-                        </Card>
-                    ))}
-                    <Card align="center">
-                        <CardHeader>
-                            <Heading size="md">Add Unlisted Application</Heading>
-                        </CardHeader>
-                        <CardBody>
-                            <Text>
-                                Know of an application you&apos;d like to add that isn&apos;t listed here? Click the
-                                &quot;Add Custom&quot; button below to add it.
-                            </Text>
-                        </CardBody>
-                        <CardFooter>
-                            <Button variant="outline">Add Custom</Button>
-                        </CardFooter>
-                    </Card>
-                </Flex>
-            </Header>
-        </Layout>
+        <>
+            <Layout>
+                <Header title="Add an Application">
+                    <Flex direction="column" pt="2" gap="2">
+                        {mods.data.map((mod: Mod, index) => (
+                            <AppCard
+                                key={`${mod.name}-${index}`}
+                                heading={mod.name}
+                                description={mod.description}
+                                footer={
+                                    <>
+                                        <ModBtnLink mod={mod} btnText="View here" target="_blank" />
+                                        <Button variant="outline" onClick={() => toggleModUsage(mod)}>
+                                            {mod.inUse ? 'Remove from home' : 'Add to home'}
+                                        </Button>
+                                        {mod.issuesPageLink && (
+                                            <Button
+                                                as="a"
+                                                href={mod.issuesPageLink}
+                                                target="_blank"
+                                                variant="outline"
+                                                colorScheme="red"
+                                            >
+                                                Report Issue
+                                            </Button>
+                                        )}
+                                    </>
+                                }
+                            />
+                        ))}
+                        <AppCard
+                            heading="Add Unlisted Application"
+                            description="Know of an application you'd like to add that isn't listed here? Click the
+                                &quot;Add Custom&quot; button below to add it."
+                            footer={
+                                <Button variant="outline" onClick={() => setIsOpen(true)}>
+                                    Add Custom
+                                </Button>
+                            }
+                        />
+                    </Flex>
+                </Header>
+            </Layout>
+            <AlertModal
+                isOpen={isOpen}
+                onClose={() => setIsOpen(false)}
+                onConfirm={addCustomMod}
+                header="Add a Custom Application"
+                body={
+                    <>
+                        <Text pb="2">
+                            WARNING: Custom applications are not curated, ensure that you trust them before connecting
+                            to them.
+                        </Text>
+                        <Text pb="2">
+                            Enter the name, description, and url path of the custom application below and then click
+                            &quot;Add&quot; to include it with your current applications.
+                        </Text>
+                        <VStack w="full">
+                            <Input ref={nameRef} placeholder="Name" />
+                            <Input ref={descriptionRef} placeholder="Description" />
+                            <Input ref={urlRef} placeholder="URL" />
+                        </VStack>
+                    </>
+                }
+                confirmBtnText="Add"
+                confirmBtnColor="red"
+                cancelBtnText="Cancel"
+            />
+        </>
     )
 }

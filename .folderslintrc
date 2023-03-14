@@ -3,6 +3,7 @@
   "rules": [
     "components/*",
     "constants",
+    "mods",
     "pages/*",
     "redux",
     "redux/slice",

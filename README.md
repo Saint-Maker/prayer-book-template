@@ -11,6 +11,18 @@ The draft of the SaintMaker PWA. Will eventually include a prayerbook, confessio
 
 </p>
 </details>
+<details><summary>Modders Guide</summary>
+<p>
+
+The SaintMaker has the goal of being "moddable" in that you can create additional applications independent of it and link them back to it. However, we curate said applications.
+
+If you would like to create a mod for the SaintMaker then the steps for doing so are as follows:
+- Fork the SaintMaker mod template and build your new application on top of it https://github.com/Saint-Maker/saint-maker-mod-template/pulls
+- Create a pull request here with a json copy of the commented out json object in src/mods/AModJsonTemplate.js with the details of your mod https://github.com/Saint-Maker/prayer-book-template-a/pulls
+- We will then review your mod and its corresponding codebase. If we believe it fits our audience (we probably will) we'll merge it; however, if it does not, users will still be able to add it as a custom mod.
+
+</p>
+</details>
 <details><summary>Coding Standards</summary>
 <p>
 
@@ -165,10 +177,17 @@ We use the running of yarn coverage to, for now, ensure that the utils folder is
 - Setup draft of mod select page
 - Update Chakra UI
 
-Backlog
+3/13/23
 - move "selected mod" list into indexDB
 - add "issuesPageLink" to ModDetails
 - wire up mod selection and removal functionality
+- wire up custom mod functionality
+- create ReadMe mod guide
+
+Backlog
+- make apps arrangable
+- unify around calling them 'apps' or 'mods'
+- figure out how to give mods custom sidebar icons
 - add eslint rule for unused imports
 - ensure that past habit data (when a habit is made) is not marked in red
 - figure out text truncation for habit titles

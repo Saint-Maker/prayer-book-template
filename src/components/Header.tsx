@@ -14,11 +14,17 @@ import {
     Box,
     Flex,
 } from '@chakra-ui/react'
-import { ReactElement, ReactNode, useRef } from 'react'
+import { ReactElement, ReactNode, useEffect, useRef } from 'react'
 import { AiFillHome, AiOutlineMenu } from 'react-icons/ai'
 import { BsListUl, BsMoonFill, BsSunFill } from 'react-icons/bs'
 import { GiPrayer } from 'react-icons/gi'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+
+import { getMods } from '~slices/modSlice'
+import { AppDispatch, selectMods } from '~store'
+import { ModBtnLink } from '~components/ModBtnLink'
+import { ModHeaderBtnLink } from '~components/ModHeaderBtnLink'
 
 type Props = {
     children: unknown
@@ -32,7 +38,13 @@ export const Header = ({ children, title, headerBtns, drawerBtns }: Props) => {
 
     const { colorMode, toggleColorMode } = useColorMode()
     const btnRef = useRef<HTMLButtonElement>(null)
+    const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
+    const mods = useSelector(selectMods)
+
+    useEffect(() => {
+        dispatch(getMods())
+    }, [])
 
     return (
         <>
@@ -65,24 +77,12 @@ export const Header = ({ children, title, headerBtns, drawerBtns }: Props) => {
                             >
                                 Home
                             </Button>
-                            <Button
-                                onClick={() => navigate('/prayers')}
-                                disabled={window.location.pathname === '/prayers'}
-                                w="full"
-                                leftIcon={<GiPrayer />}
-                                justifyContent="flex-start"
-                            >
-                                Prayer Book
-                            </Button>
-                            <Button
-                                onClick={() => navigate('/habits')}
-                                disabled={window.location.pathname === '/habits'}
-                                w="full"
-                                leftIcon={<BsListUl />}
-                                justifyContent="flex-start"
-                            >
-                                Habits
-                            </Button>
+                            {mods.data
+                                .filter((mod: Mod) => mod.inUse === true)
+                                .map((mod: Mod, index: number) => (
+                                    <ModHeaderBtnLink mod={mod} key={`${mod.name}-${index}`} />
+                                ))}
+
                             <Button
                                 onClick={() => navigate('/mods')}
                                 disabled={window.location.pathname === '/mods'}
