@@ -17,14 +17,13 @@ import {
 import { ReactElement, ReactNode, useEffect, useRef } from 'react'
 import { AiFillHome, AiOutlineMenu } from 'react-icons/ai'
 import { BsListUl, BsMoonFill, BsSunFill } from 'react-icons/bs'
-import { GiPrayer } from 'react-icons/gi'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 import { getMods } from '~slices/modSlice'
-import { AppDispatch, selectMods } from '~store'
-import { ModBtnLink } from '~components/ModBtnLink'
+import { AppDispatch, selectMods, selectSelectedMods } from '~store'
 import { ModHeaderBtnLink } from '~components/ModHeaderBtnLink'
+import { getSelectedMods } from '~slices/selectedModSlice'
 
 type Props = {
     children: unknown
@@ -41,8 +40,10 @@ export const Header = ({ children, title, headerBtns, drawerBtns }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
     const mods = useSelector(selectMods)
+    const selectedMods = useSelector(selectSelectedMods)
 
     useEffect(() => {
+        dispatch(getSelectedMods())
         dispatch(getMods())
     }, [])
 
@@ -78,11 +79,10 @@ export const Header = ({ children, title, headerBtns, drawerBtns }: Props) => {
                                 Home
                             </Button>
                             {mods.data
-                                .filter((mod: Mod) => mod.inUse === true)
+                                .filter((mod: Mod) => (selectedMods.data[mod.id] ?? false) === true)
                                 .map((mod: Mod, index: number) => (
                                     <ModHeaderBtnLink mod={mod} key={`${mod.name}-${index}`} />
                                 ))}
-
                             <Button
                                 onClick={() => navigate('/mods')}
                                 disabled={window.location.pathname === '/mods'}
@@ -90,7 +90,7 @@ export const Header = ({ children, title, headerBtns, drawerBtns }: Props) => {
                                 leftIcon={<BsListUl />}
                                 justifyContent="flex-start"
                             >
-                                Select a Mod
+                                Add an Application
                             </Button>
                             <Button
                                 onClick={toggleColorMode}

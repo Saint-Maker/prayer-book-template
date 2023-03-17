@@ -17,8 +17,11 @@ interface Mod {
   isNative: boolean
   path: string
   description: string
-  inUse: boolean
   issuesPageLink: string
+}
+
+interface SelectedMods {
+  [key: string]: boolean
 }
 
 interface BeforeInstallPromptEvent extends Event {

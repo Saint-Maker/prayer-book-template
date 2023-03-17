@@ -3,20 +3,23 @@ import { Button, Heading, VStack } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { selectMods, selectPWA } from '~store'
+import { selectMods, selectPWA, selectSelectedMods } from '~store'
 import { setDeferredPrompt } from '~slices/pwaSlice'
 import type { AppDispatch } from '~store'
 import { Layout } from '~components/Layout'
 import { getMods } from '~slices/modSlice'
 import { ModBtnLink } from '~components/ModBtnLink'
+import { getSelectedMods } from '~slices/selectedModSlice'
 
 export const App = (): JSX.Element => {
     const pwa = useSelector(selectPWA)
     const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
     const mods = useSelector(selectMods)
+    const selectedMods = useSelector(selectSelectedMods)
 
     useEffect(() => {
+        dispatch(getSelectedMods())
         dispatch(getMods())
     }, [])
 
@@ -37,7 +40,7 @@ export const App = (): JSX.Element => {
             </Heading>
             <VStack w="full">
                 {mods.data
-                    .filter((mod: Mod) => mod.inUse === true)
+                    .filter((mod: Mod) => (selectedMods.data[mod.id] ?? false) === true)
                     .map((mod: Mod, index: number) => (
                         <ModBtnLink key={`${mod.name}-${index}`} mod={mod} btnText={mod.name} width="full" />
                     ))}

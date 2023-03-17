@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { nanoid } from 'nanoid'
 
 import { idb } from '~utils/idb'
 
@@ -7,11 +6,8 @@ import { idb } from '~utils/idb'
 import defaultModData from './../../defaultModData.json'
 
 export const getMods = createAsyncThunk('mod/getMods', async () => {
-    let data = (await idb.readData('mods')) || []
-    if (data.length === 0) {
-        data = defaultModData.map((modData: Partial<Mod>) => ({ ...modData, id: nanoid(16) }))
-        await idb.writeData('mods', data)
-    }
+    const data = defaultModData
+    await idb.writeData('mods', data)
     return data
 })
 export const addMod = createAsyncThunk('mod/addMod', async (mod: Mod) => {

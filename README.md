@@ -184,7 +184,13 @@ We use the running of yarn coverage to, for now, ensure that the utils folder is
 - wire up custom mod functionality
 - create ReadMe mod guide
 
+3/16/23
+- have mods list update with latest list
+
 Backlog
+- implement onboarding pages
+- remove unnecessary data from slices
+- set idb to use generics
 - make apps arrangable
 - unify around calling them 'apps' or 'mods'
 - figure out how to give mods custom sidebar icons
