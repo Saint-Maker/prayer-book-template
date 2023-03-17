@@ -8,7 +8,7 @@ const defaultState = {
 }
 
 export const getSelectedMods = createAsyncThunk('selectedMod/getSelectedMods', async () => {
-    let data = (await idb.readObject('selectedMods')) || {}
+    let data = ((await idb.readObject('selectedMods')) || {}) as SelectedMods
     if (Object.keys(data).length === 0) {
         data = defaultState
         await idb.writeObject('selectedMods', data)
