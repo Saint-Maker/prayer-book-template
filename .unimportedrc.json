@@ -1,4 +1,3 @@
 {
-    "ignoreUnresolved": ["virtual:pwa-register"],
-    "ignoreUnimported": ["src/mods/AModJsonTemplate.js"]
+    "ignoreUnresolved": ["virtual:pwa-register"]
 }
