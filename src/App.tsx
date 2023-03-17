@@ -1,20 +1,27 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, Heading, VStack } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { selectPWA } from '~store'
+import { selectMods, selectPWA, selectSelectedMods } from '~store'
 import { setDeferredPrompt } from '~slices/pwaSlice'
 import type { AppDispatch } from '~store'
 import { Layout } from '~components/Layout'
+import { getMods } from '~slices/modSlice'
+import { ModBtnLink } from '~components/ModBtnLink'
+import { getSelectedMods } from '~slices/selectedModSlice'
 
 export const App = (): JSX.Element => {
     const pwa = useSelector(selectPWA)
     const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
+    const mods = useSelector(selectMods)
+    const selectedMods = useSelector(selectSelectedMods)
 
-    const gotoPrayers = () => navigate('/prayers')
-    const gotoHabits = () => navigate('/habits')
+    useEffect(() => {
+        dispatch(getSelectedMods())
+        dispatch(getMods())
+    }, [])
 
     const installHandler = async (e: React.MouseEvent<HTMLButtonElement>) => {
         if (pwa.deferredPrompt !== null) {
@@ -32,11 +39,13 @@ export const App = (): JSX.Element => {
                 Saint Maker
             </Heading>
             <VStack w="full">
-                <Button onClick={gotoPrayers} w="full">
-                    Prayer Book
-                </Button>
-                <Button onClick={gotoHabits} w="full">
-                    Habits
+                {mods.data
+                    .filter((mod: Mod) => (selectedMods.data[mod.id] ?? false) === true)
+                    .map((mod: Mod, index: number) => (
+                        <ModBtnLink key={`${mod.name}-${index}`} mod={mod} btnText={mod.name} width="full" />
+                    ))}
+                <Button onClick={() => navigate('/mods')} w="full">
+                    Add More
                 </Button>
                 <Button
                     onClick={void installHandler}

@@ -11,6 +11,30 @@ The draft of the SaintMaker PWA. Will eventually include a prayerbook, confessio
 
 </p>
 </details>
+<details><summary>Modders Guide</summary>
+<p>
+
+The SaintMaker has the goal of being "moddable" in that you can create additional applications independent of it and link them back to it. However, we curate said applications.
+
+If you would like to create a mod for the SaintMaker then the steps for doing so are as follows:
+- Fork the SaintMaker mod template and build your new application on top of it https://github.com/Saint-Maker/saint-maker-mod-template/pulls
+- Create a pull request off of this repository. To integrate your mod into our "marketplace" you'll need to run `yarn mod {your mod name} {your github name}` this will generate a json file with a name like `Examen_cb0806151.json` in `src/mods` with a similar structure to the json included below. 
+- Once you've filled out that json with your mods detail your pull request is ready to submit.
+- We will then review your pull request and its corresponding codebase. If we believe it fits our audience (we probably will) we'll merge it; however, if it does not, users will still be able to add it as a custom mod.
+
+```
+{
+    "id": "a unique identifier", // a unique identifier that will automatically be generated
+    "name": "Name", // the name of your mod
+    "issuesPageLink":  "https://github.../issues/new", // a link to the new issue page of your mods github/gitlab
+    "path": 'https://something.com', // the url of your mod
+    "description": "A description", // the description of your mod
+    "isNative": false, // leave as false
+}
+```
+
+</p>
+</details>
 <details><summary>Coding Standards</summary>
 <p>
 
@@ -161,7 +185,28 @@ We use the running of yarn coverage to, for now, ensure that the utils folder is
 2/13/23
 - integrate jscpd to keep the code dry
 
+3/12/23
+- Setup draft of mod select page
+- Update Chakra UI
+
+3/13/23
+- move "selected mod" list into indexDB
+- add "issuesPageLink" to ModDetails
+- wire up mod selection and removal functionality
+- wire up custom mod functionality
+- create ReadMe mod guide
+
+3/16/23
+- have mods list update with latest list
+
 Backlog
+- implement onboarding pages
+- remove unnecessary data from slices
+- set idb to use generics
+- make apps arrangable
+- unify around calling them 'apps' or 'mods'
+- figure out how to give mods custom sidebar icons
+- add eslint rule for unused imports
 - ensure that past habit data (when a habit is made) is not marked in red
 - figure out text truncation for habit titles
 - handle habit editing locally instead of in state

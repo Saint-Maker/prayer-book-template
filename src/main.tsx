@@ -6,11 +6,9 @@ import { registerSW } from 'virtual:pwa-register'
 import { AnimatePresence } from 'framer-motion'
 
 import { store } from '~store'
-import { Prayer } from '~pages/Prayers'
-import { Habits } from '~pages/Habits'
+import { routes } from '~constants/routes'
 
 import { theme } from './theme'
-import { App } from './App'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <>
@@ -20,9 +18,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
                 <ChakraProvider theme={theme}>
                     <Router>
                         <Routes>
-                            <Route path="/" element={<App />} />
-                            <Route path="/prayers" element={<Prayer />} />
-                            <Route path="/habits" element={<Habits />} />
+                            {routes.map((route, index) => (
+                                <Route key={`${route.path}-${index}`} path={route.path} element={route.destination} />
+                            ))}
                         </Routes>
                     </Router>
                 </ChakraProvider>

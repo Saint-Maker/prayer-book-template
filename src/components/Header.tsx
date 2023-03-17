@@ -14,11 +14,16 @@ import {
     Box,
     Flex,
 } from '@chakra-ui/react'
-import { ReactElement, ReactNode, useRef } from 'react'
+import { ReactElement, ReactNode, useEffect, useRef } from 'react'
 import { AiFillHome, AiOutlineMenu } from 'react-icons/ai'
 import { BsListUl, BsMoonFill, BsSunFill } from 'react-icons/bs'
-import { GiPrayer } from 'react-icons/gi'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+
+import { getMods } from '~slices/modSlice'
+import { AppDispatch, selectMods, selectSelectedMods } from '~store'
+import { ModHeaderBtnLink } from '~components/ModHeaderBtnLink'
+import { getSelectedMods } from '~slices/selectedModSlice'
 
 type Props = {
     children: unknown
@@ -32,10 +37,15 @@ export const Header = ({ children, title, headerBtns, drawerBtns }: Props) => {
 
     const { colorMode, toggleColorMode } = useColorMode()
     const btnRef = useRef<HTMLButtonElement>(null)
+    const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
-    const gotoHome = () => navigate('/')
-    const gotoPrayers = () => navigate('/prayers')
-    const gotoHabits = () => navigate('/habits')
+    const mods = useSelector(selectMods)
+    const selectedMods = useSelector(selectSelectedMods)
+
+    useEffect(() => {
+        dispatch(getSelectedMods())
+        dispatch(getMods())
+    }, [])
 
     return (
         <>
@@ -58,28 +68,29 @@ export const Header = ({ children, title, headerBtns, drawerBtns }: Props) => {
                 <DrawerContent>
                     <DrawerCloseButton />
                     <DrawerHeader>Menu</DrawerHeader>
-                    <DrawerBody display="flex" experimental_spaceY={2}>
+                    <DrawerBody display="flex">
                         <Flex display="flex" direction="column" gap="2" width="100%">
-                            <Button onClick={gotoHome} w="full" leftIcon={<AiFillHome />} justifyContent="flex-start">
-                                Home
-                            </Button>
                             <Button
-                                onClick={gotoPrayers}
-                                disabled={window.location.pathname === '/prayers'}
+                                onClick={() => navigate('/')}
                                 w="full"
-                                leftIcon={<GiPrayer />}
+                                leftIcon={<AiFillHome />}
                                 justifyContent="flex-start"
                             >
-                                Prayer Book
+                                Home
                             </Button>
+                            {mods.data
+                                .filter((mod: Mod) => (selectedMods.data[mod.id] ?? false) === true)
+                                .map((mod: Mod, index: number) => (
+                                    <ModHeaderBtnLink mod={mod} key={`${mod.name}-${index}`} />
+                                ))}
                             <Button
-                                onClick={gotoHabits}
-                                disabled={window.location.pathname === '/habits'}
+                                onClick={() => navigate('/mods')}
+                                disabled={window.location.pathname === '/mods'}
                                 w="full"
                                 leftIcon={<BsListUl />}
                                 justifyContent="flex-start"
                             >
-                                Habits
+                                Add an Application
                             </Button>
                             <Button
                                 onClick={toggleColorMode}

@@ -11,7 +11,7 @@ import {
 
 interface Props {
     header: string
-    body: string
+    body: string | React.ReactNode
     cancelBtnText?: string
     confirmBtnText?: string
     isOpen: boolean

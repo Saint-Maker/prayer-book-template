@@ -6,3 +6,4 @@ custom-rules/*
 vite.config.ts
 vitest.config.ts
 *.test.ts
+generateDefaultModList.js
