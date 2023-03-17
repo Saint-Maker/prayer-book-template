@@ -18,8 +18,20 @@ The SaintMaker has the goal of being "moddable" in that you can create additiona
 
 If you would like to create a mod for the SaintMaker then the steps for doing so are as follows:
 - Fork the SaintMaker mod template and build your new application on top of it https://github.com/Saint-Maker/saint-maker-mod-template/pulls
-- Create a pull request here with a json copy of the commented out json object in src/mods/AModJsonTemplate.js with the details of your mod https://github.com/Saint-Maker/prayer-book-template-a/pulls
-- We will then review your mod and its corresponding codebase. If we believe it fits our audience (we probably will) we'll merge it; however, if it does not, users will still be able to add it as a custom mod.
+- Create a pull request off of this repository. To integrate your mod into our "marketplace" you'll need to run `yarn mod {your mod name} {your github name}` this will generate a json file with a name like `Examen_cb0806151.json` in `src/mods` with a similar structure to the json included below. 
+- Once you've filled out that json with your mods detail your pull request is ready to submit.
+- We will then review your pull request and its corresponding codebase. If we believe it fits our audience (we probably will) we'll merge it; however, if it does not, users will still be able to add it as a custom mod.
+
+```
+{
+    "id": "a unique identifier", // a unique identifier that will automatically be generated
+    "name": "Name", // the name of your mod
+    "issuesPageLink":  "https://github.../issues/new", // a link to the new issue page of your mods github/gitlab
+    "path": 'https://something.com', // the url of your mod
+    "description": "A description", // the description of your mod
+    "isNative": false, // leave as false
+}
+```
 
 </p>
 </details>
