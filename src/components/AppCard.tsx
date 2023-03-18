@@ -1,10 +1,10 @@
-import { Card, Text, CardHeader, Heading, CardBody, CardFooter, Button } from '@chakra-ui/react'
+import { Card, Text, CardHeader, Heading, CardBody, CardFooter, Button, HStack } from '@chakra-ui/react'
 import React from 'react'
 
 interface IAppCard {
     heading: string
     description: string
-    footer: React.ReactNode
+    footer: React.ReactNode | React.ReactNode[]
 }
 
 export const AppCard = ({ heading, description, footer }: IAppCard) => {
@@ -14,9 +14,11 @@ export const AppCard = ({ heading, description, footer }: IAppCard) => {
                 <Heading size="md">{heading}</Heading>
             </CardHeader>
             <CardBody>
-                <Text>{description}</Text>
+                <Text maxWidth="400px">{description}</Text>
             </CardBody>
-            <CardFooter gap="2">{footer}</CardFooter>
+            <CardFooter gap="2" flexWrap="wrap" justifyContent="center">
+                {footer}
+            </CardFooter>
         </Card>
     )
 }
