@@ -4,7 +4,7 @@ import React from 'react'
 interface IAppCard {
     heading: string
     description: string
-    footer: React.ReactNode | React.ReactNode[]
+    footer: React.ReactNode
 }
 
 export const AppCard = ({ heading, description, footer }: IAppCard) => {
