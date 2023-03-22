@@ -5,7 +5,7 @@ describe('getTodaysMostRecentSunday', () => {
     it('If today is Tuesday, return most recent Sunday', () => {
         const monday = new Date('2023-02-07T13:44:55.462Z')
         vi.setSystemTime(monday)
-        
+
         const sunday = new Date('2023-02-05T06:00:00.000Z')
 
         const result = getTodaysMostRecentSunday()

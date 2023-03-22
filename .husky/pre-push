@@ -8,3 +8,4 @@ yarn folderslint
 yarn format
 yarn dry-test
 git add . -A
+git commit -m "prettify code"
