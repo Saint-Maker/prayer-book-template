@@ -1,10 +1,20 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Button, HStack, Input, VStack, chakra, IconButton, useDisclosure } from '@chakra-ui/react'
+import {
+    Button,
+    HStack,
+    Input,
+    VStack,
+    chakra,
+    IconButton,
+    useDisclosure,
+    InputGroup,
+    InputRightElement,
+} from '@chakra-ui/react'
 import { useSelector, useDispatch } from 'react-redux'
 import { nanoid } from 'nanoid'
 import ReactQuill from 'react-quill'
 import { AiOutlinePlusCircle } from 'react-icons/ai'
-import { BsDownload, BsTrashFill, BsUpload } from 'react-icons/bs'
+import { BsDownload, BsSearch, BsTrashFill, BsUpload } from 'react-icons/bs'
 import DOMPurify from 'dompurify'
 
 import { selectPrayers } from '~store'
@@ -28,6 +38,7 @@ export const Prayer = () => {
     const [text, setText] = useState('')
     const [title, setTitle] = useState('')
     const [addToggled, setAddToggled] = useState(false)
+    const [searchText, setSearchText] = useState('')
     const [editing, setEditing] = useState(false)
     const [prayerId, setPrayerId] = useState('')
     const prayers = useSelector(selectPrayers)
@@ -121,6 +132,7 @@ export const Prayer = () => {
                 const result = JSON.parse(stringResult)
                 const purifiedResult = result.map((prayer: Prayer) => {
                     prayer.text = DOMPurify.sanitize(prayer.text)
+                    prayer.title = DOMPurify.sanitize(prayer.title)
                     return prayer
                 })
                 dispatch(setPrayers(purifiedResult))
@@ -198,6 +210,20 @@ export const Prayer = () => {
                             )}
                         </chakra.form>
                     )}
+                    <InputGroup size="md">
+                        <Input
+                            name="search"
+                            value={searchText}
+                            onChange={(e) => setSearchText(e.target.value)}
+                            placeholder="Search by title or prayer contents"
+                            autoComplete="off"
+                        />
+                        <InputRightElement width="4.5rem">
+                            <Button h="1.75rem" size="sm" onClick={() => setSearchText('')}>
+                                Clear
+                            </Button>
+                        </InputRightElement>
+                    </InputGroup>
                     {prayers.loading === false &&
                         prayers.data
                             .filter(({ id, ...text }) => id !== prayerId)
@@ -207,6 +233,7 @@ export const Prayer = () => {
                                         key={id}
                                         id={id}
                                         {...text}
+                                        searchText={searchText}
                                         onEdit={() => editingPrayer(id, text.text, text.title)}
                                     />
                                 )

@@ -203,6 +203,9 @@ We use the running of yarn coverage to, for now, ensure that the utils folder is
 - fix UI issue
 - change husky to run on push
 
+3/22/23
+- make prayerbook searchable
+
 Backlog
 - implement onboarding pages
 - remove unnecessary data from slices
