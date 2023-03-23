@@ -21,10 +21,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 import { getMods } from '~slices/modSlice'
-import { AppDispatch, selectCustomMods, selectMods, selectSelectedMods } from '~store'
+import { AppDispatch, selectMods, selectSelectedMods } from '~store'
 import { ModHeaderBtnLink } from '~components/ModHeaderBtnLink'
 import { getSelectedMods } from '~slices/selectedModSlice'
-import { getCustomMods } from '~slices/customModSlice'
 
 type Props = {
     children: unknown

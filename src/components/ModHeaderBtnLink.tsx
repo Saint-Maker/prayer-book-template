@@ -10,7 +10,7 @@ export const ModHeaderBtnLink = ({ mod }: IModHeaderBtnLink) => {
 
     return (
         <>
-            {'isNative' in mod && mod.isNative ? (
+            {mod.isNative ? (
                 <Button
                     onClick={() => navigate(mod.path)}
                     disabled={window.location.pathname === mod.path}
