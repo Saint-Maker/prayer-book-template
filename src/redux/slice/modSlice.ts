@@ -6,9 +6,11 @@ import { idb } from '~utils/idb'
 import defaultModData from './../../defaultModData.json'
 
 export const getMods = createAsyncThunk('mod/getMods', async () => {
-    const data = defaultModData
-    await idb.writeData('mods', data)
-    return data
+    const defaultMods = defaultModData
+    const customMods = (await idb.readData('customMods')) || []
+    const allMods = [...defaultMods, ...customMods]
+    await idb.writeData('mods', allMods)
+    return allMods
 })
 export const addMod = createAsyncThunk('mod/addMod', async (mod: Mod) => {
     const data = (await idb.readData('mods')) || []

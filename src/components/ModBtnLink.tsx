@@ -13,7 +13,7 @@ export const ModBtnLink = ({ mod, btnText, width = 'initial', target = '_self' }
 
     return (
         <>
-            {mod.isNative ? (
+            {'isNative' in mod && mod.isNative ? (
                 <Button onClick={() => navigate(mod.path)} w={width}>
                     {btnText}
                 </Button>
