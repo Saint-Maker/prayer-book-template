@@ -6,6 +6,9 @@ export default defineConfig({
         alias: getGeneratedAliases(),
     },
     test: {
+        globals: true,
+        environment: 'jsdom',
+        globalSetup: './src/test-globals.ts',
         watch: false,
         coverage: {
             all: true,
