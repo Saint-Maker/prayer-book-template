@@ -13,5 +13,6 @@ export const selectHabits = (state: RootState) => state.habits
 export const selectPWA = (state: RootState) => state.pwa
 export const selectMods = (state: RootState) => state.mods
 export const selectSelectedMods = (state: RootState) => state.selectedMods
+export const selectCustomMods = (state: RootState) => state.customMods
 
 export type AppDispatch = typeof store.dispatch

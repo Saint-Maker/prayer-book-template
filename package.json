@@ -55,6 +55,7 @@
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-no-inline-styles": "^1.0.5",
     "eslint-plugin-react": "^7.30.0",
+    "eslint-plugin-unused-imports": "^2.0.0",
     "folderslint": "^1.2.0",
     "https-localhost": "^4.7.1",
     "husky": "^8.0.3",
