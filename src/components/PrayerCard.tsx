@@ -1,6 +1,7 @@
 import { Box, Button, IconButton, Text, HStack, useColorModeValue, useDisclosure } from '@chakra-ui/react'
 import { BsTrashFill, BsPencil } from 'react-icons/bs'
 import { useDispatch } from 'react-redux'
+import { useEffect, useState } from 'react'
 
 import { deletePrayer } from '~slices/prayerSlice'
 import { AppDispatch } from '~store'
@@ -10,30 +11,57 @@ type Props = {
     id: string
     title: string
     text: string
+    searchText: string
     onEdit: () => void
 }
 
-export const PrayerCard = ({ id, title, text, onEdit }: Props) => {
+export const PrayerCard = ({ id, title, text, searchText, onEdit }: Props) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const bg = useColorModeValue('gray.100', 'gray.700')
     const dispatch = useDispatch<AppDispatch>()
+    const [displayTitle, setDisplayTitle] = useState(title)
+    const [displayText, setDisplayText] = useState(text)
+    const [textShown, setTextShown] = useState(false)
 
     const handleDelete = () => {
         if (id) dispatch(deletePrayer(id))
     }
 
+    useEffect(() => {
+        if (searchText.length === 0) {
+            setDisplayTitle(title)
+            setDisplayText(text)
+            setTextShown(false)
+            return
+        }
+        try {
+            const searchRegEx = new RegExp(`(?<![\/<])${searchText}(?!>)`, 'gi')
+            const textSearchResults = text.replaceAll(searchRegEx, `<mark>$&</mark>`)
+            setDisplayTitle(title.replaceAll(searchRegEx, `<mark>$&</mark>`))
+            if (textSearchResults === text) {
+                setTextShown(false)
+                return
+            }
+            setDisplayText(textSearchResults)
+            setTextShown(true)
+        } catch (err) {
+            // WHY: quietly catch an error when user input breaks the regex
+        }
+    }, [searchText, text, title])
+
     return (
-        <Box as="details" w="full">
+        <Box w="full">
             <Button
-                as="summary"
+                as="div"
                 listStyleType="none"
                 w="full"
                 justifyContent="space-between"
                 fontWeight="bold"
                 fontSize="xl"
+                onClick={() => setTextShown(!textShown)}
             >
-                <Box w="full" overflow="hidden" pr="2" noOfLines={1}>
-                    <Text noOfLines={1}>{title}</Text>
+                <Box w="full" overflow="hidden" whiteSpace="normal" pr="2" noOfLines={1}>
+                    <Text noOfLines={1} dangerouslySetInnerHTML={{ __html: displayTitle }} />
                 </Box>
                 <HStack spacing="1rem">
                     <IconButton
@@ -52,9 +80,11 @@ export const PrayerCard = ({ id, title, text, onEdit }: Props) => {
                     />
                 </HStack>
             </Button>
-            <Box bg={bg} my="2" mx="4" p="1" rounded="sm">
-                <Text dangerouslySetInnerHTML={{ __html: text }} />
-            </Box>
+            {textShown && (
+                <Box bg={bg} my="2" mx="4" p="1" rounded="sm">
+                    <Text dangerouslySetInnerHTML={{ __html: displayText }} />
+                </Box>
+            )}
             <AlertModal
                 isOpen={isOpen}
                 onClose={onClose}
