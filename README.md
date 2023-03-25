@@ -203,14 +203,16 @@ We use the running of yarn coverage to, for now, ensure that the utils folder is
 - fix UI issue
 - change husky to run on push
 
+3/22/23
+- Add custom mods and make them duplicate writes to mods 
+- add eslint rule for unused imports
+
 Backlog
 - implement onboarding pages
 - remove unnecessary data from slices
 - set idb to use generics
-- make apps arrangable
 - unify around calling them 'apps' or 'mods'
 - figure out how to give mods custom sidebar icons
-- add eslint rule for unused imports
 - ensure that past habit data (when a habit is made) is not marked in red
 - figure out text truncation for habit titles
 - handle habit editing locally instead of in state
