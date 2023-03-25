@@ -14,7 +14,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { nanoid } from 'nanoid'
 import ReactQuill from 'react-quill'
 import { AiOutlinePlusCircle } from 'react-icons/ai'
-import { BsDownload, BsSearch, BsTrashFill, BsUpload } from 'react-icons/bs'
+import { BsDownload, BsTrashFill, BsUpload } from 'react-icons/bs'
 import DOMPurify from 'dompurify'
 
 import { selectPrayers } from '~store'

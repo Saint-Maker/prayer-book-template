@@ -208,6 +208,10 @@ We use the running of yarn coverage to, for now, ensure that the utils folder is
 - Add custom mods and make them duplicate writes to mods 
 - add eslint rule for unused imports
 
+3/25/23
+- make prayerbook search case insensitive
+- include default prayers in prayerbook
+
 Backlog
 - implement onboarding pages
 - remove unnecessary data from slices

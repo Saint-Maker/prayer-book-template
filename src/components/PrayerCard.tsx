@@ -35,9 +35,9 @@ export const PrayerCard = ({ id, title, text, searchText, onEdit }: Props) => {
             return
         }
         try {
-            const searchRegEx = new RegExp(searchText, 'g')
-            const textSearchResults = text.replace(searchRegEx, `<mark>${searchText}</mark>`)
-            setDisplayTitle(title.replace(searchRegEx, `<mark>${searchText}</mark>`))
+            const searchRegEx = new RegExp(`(?<![\/<])${searchText}(?!>)`, 'gi')
+            const textSearchResults = text.replaceAll(searchRegEx, `<mark>$&</mark>`)
+            setDisplayTitle(title.replaceAll(searchRegEx, `<mark>$&</mark>`))
             if (textSearchResults === text) {
                 setTextShown(false)
                 return
@@ -47,7 +47,7 @@ export const PrayerCard = ({ id, title, text, searchText, onEdit }: Props) => {
         } catch (err) {
             // WHY: quietly catch an error when user input breaks the regex
         }
-    }, [searchText])
+    }, [searchText, text, title])
 
     return (
         <Box w="full">
@@ -60,7 +60,7 @@ export const PrayerCard = ({ id, title, text, searchText, onEdit }: Props) => {
                 fontSize="xl"
                 onClick={() => setTextShown(!textShown)}
             >
-                <Box w="full" overflow="hidden" pr="2" noOfLines={1}>
+                <Box w="full" overflow="hidden" whiteSpace="normal" pr="2" noOfLines={1}>
                     <Text noOfLines={1} dangerouslySetInnerHTML={{ __html: displayTitle }} />
                 </Box>
                 <HStack spacing="1rem">

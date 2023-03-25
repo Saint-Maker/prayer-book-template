@@ -1,9 +1,17 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { nanoid } from 'nanoid'
 
 import { idb } from '~utils/idb'
 
+import defaultPrayerData from './../../defaultPrayerData.json'
+
 export const getPrayers = createAsyncThunk('prayer/getPrayers', async () => {
-    return idb.readData('prayers')
+    let prayers = (await idb.readData('prayers')) || []
+    if (prayers.length === 0) {
+        prayers = defaultPrayerData.map((prayer: Partial<Prayer>) => ({ ...prayer, id: nanoid(16) }))
+        await idb.writeData('prayers', prayers)
+    }
+    return prayers
 })
 export const addPrayer = createAsyncThunk('prayer/addPrayer', async (prayer: Prayer) => {
     const data = (await idb.readData('prayers')) || []
