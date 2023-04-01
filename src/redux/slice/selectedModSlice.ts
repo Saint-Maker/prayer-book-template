@@ -2,32 +2,33 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 
 import { idb } from '~utils/idb'
 
-const defaultState = {
-    'p_ZWA-iUSiMmeeAF': true,
-    eUD9oEbSHr8tEm4R: true,
-}
+const defaultState = ['p_ZWA-iUSiMmeeAF', 'eUD9oEbSHr8tEm4R']
 
 export const getSelectedMods = createAsyncThunk('selectedMod/getSelectedMods', async () => {
-    let data = ((await idb.readObject('selectedMods')) || {}) as SelectedMods
-    if (Object.keys(data).length === 0) {
+    let data = (await idb.readData('selectedMods')) || []
+    if (!Array.isArray(data) || data.length === 0) {
         data = defaultState
-        await idb.writeObject('selectedMods', data)
+        await idb.writeData('selectedMods', data)
     }
     return data
 })
-export const upsertSelectedMod = createAsyncThunk(
-    'selectedMod/editSelectedMod',
-    async (selectedMod: Record<string, boolean>) => {
-        const data: SelectedMods = ((await idb.readObject('selectedMods')) || {}) as SelectedMods
-        const key = Object.keys(selectedMod)[0]
-        const value = Object.values(selectedMod)[0]
-        data[key] = value
-        return idb.writeObject('selectedMods', data)
-    },
-)
+export const setSelectedMods = createAsyncThunk('selectedMod/setSelectedMods', async (selectedMods: string[]) => {
+    return idb.writeData('selectedMods', selectedMods)
+})
+export const addSelectedMod = createAsyncThunk('selectedMod/addSelectedMod', async (selectedMod: string) => {
+    const data = (await idb.readData('selectedMods')) || []
+    return idb.writeData('selectedMods', [selectedMod, ...data])
+})
+export const deleteSelectedMod = createAsyncThunk('selectedMod/deleteSelectedMod', async (id: string) => {
+    const data = (await idb.readData('selectedMods')) || []
+    return idb.writeData(
+        'selectedMods',
+        data.filter((modId) => modId !== id),
+    )
+})
 
 const initialState = {
-    data: {} as SelectedMods,
+    data: [] as string[],
 }
 
 const selectedModSlice = createSlice({
@@ -36,10 +37,16 @@ const selectedModSlice = createSlice({
     reducers: {},
     extraReducers: {
         [getSelectedMods.fulfilled.type]: (state, action) => {
-            state.data = action.payload || ({} as SelectedMods)
+            state.data = action.payload || []
         },
-        [upsertSelectedMod.fulfilled.type]: (state, action) => {
-            state.data = action.payload as SelectedMods
+        [setSelectedMods.fulfilled.type]: (state, action) => {
+            state.data = action.payload
+        },
+        [addSelectedMod.fulfilled.type]: (state, action) => {
+            state.data = action.payload
+        },
+        [deleteSelectedMod.fulfilled.type]: (state, action) => {
+            state.data = action.payload
         },
     },
 })

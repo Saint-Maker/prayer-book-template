@@ -1,7 +1,7 @@
 import { Button } from '@chakra-ui/react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { upsertSelectedMod } from '~slices/selectedModSlice'
+import { addSelectedMod, deleteSelectedMod } from '~slices/selectedModSlice'
 import { AppDispatch, selectSelectedMods } from '~store'
 import { AppCard } from '~components/AppCard'
 import { ModBtnLink } from '~components/ModBtnLink'
@@ -15,7 +15,7 @@ export const ModCard = ({ mod }: ModCardProps) => {
     const selectedMods = useSelector(selectSelectedMods)
 
     const toggleModUsage = (mod: Mod) => {
-        dispatch(upsertSelectedMod({ [mod.id]: !(selectedMods.data[mod.id] ?? false) }))
+        dispatch(selectedMods.data.includes(mod.id) ? deleteSelectedMod(mod.id) : addSelectedMod(mod.id))
     }
 
     return (
@@ -26,7 +26,7 @@ export const ModCard = ({ mod }: ModCardProps) => {
                 <>
                     <ModBtnLink mod={mod} btnText="View here" target="_blank" />
                     <Button variant="outline" onClick={() => toggleModUsage(mod)}>
-                        {selectedMods.data[mod.id] ?? false ? 'Remove from home' : 'Add to home'}
+                        {selectedMods.data.includes(mod.id) ? 'Remove from home' : 'Add to home'}
                     </Button>
                     {'issuesPageLink' in mod && mod.issuesPageLink && (
                         <Button as="a" href={mod.issuesPageLink} target="_blank" variant="outline" colorScheme="red">
