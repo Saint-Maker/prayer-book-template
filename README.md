@@ -212,8 +212,12 @@ We use the running of yarn coverage to, for now, ensure that the utils folder is
 - make prayerbook search case insensitive
 - include default prayers in prayerbook
 
+3/29/23
+- Implement draft of app sorting system
+
 3/31/23
-- determine PR standards and create github PR template
+- Improve UX of draggable elements
+- Determine PR standards and create github PR template
 
 Backlog
 - implement onboarding pages

@@ -14,7 +14,7 @@ import {
     Box,
     Flex,
 } from '@chakra-ui/react'
-import { ReactElement, ReactNode, useEffect, useRef } from 'react'
+import { ReactElement, ReactNode, useEffect, useRef, useState } from 'react'
 import { AiFillHome, AiOutlineMenu } from 'react-icons/ai'
 import { BsListUl, BsMoonFill, BsSunFill } from 'react-icons/bs'
 import { useDispatch, useSelector } from 'react-redux'
@@ -41,11 +41,22 @@ export const Header = ({ children, title, headerBtns, drawerBtns }: Props) => {
     const navigate = useNavigate()
     const mods = useSelector(selectMods)
     const selectedMods = useSelector(selectSelectedMods)
+    const [sortedMods, setSortedMods] = useState<Mod[]>([])
 
     useEffect(() => {
         dispatch(getSelectedMods())
         dispatch(getMods())
     }, [])
+
+    useEffect(() => {
+        const modsSorted: Mod[] = []
+        selectedMods.data.forEach((modId) => {
+            mods.data.find((mod) => {
+                if (mod.id === modId) modsSorted.push(mod)
+            })
+        })
+        setSortedMods(modsSorted)
+    }, [mods, selectedMods])
 
     return (
         <>
@@ -78,11 +89,9 @@ export const Header = ({ children, title, headerBtns, drawerBtns }: Props) => {
                             >
                                 Home
                             </Button>
-                            {mods.data
-                                .filter((mod: Mod) => (selectedMods.data[mod.id] ?? false) === true)
-                                .map((mod: Mod, index: number) => (
-                                    <ModHeaderBtnLink mod={mod} key={`${mod.name}-${index}`} />
-                                ))}
+                            {sortedMods.map((mod: Mod, index: number) => (
+                                <ModHeaderBtnLink mod={mod} key={`${mod.name}-${index}`} />
+                            ))}
                             <Button
                                 onClick={() => navigate('/mods')}
                                 disabled={window.location.pathname === '/mods'}
