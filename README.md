@@ -212,6 +212,9 @@ We use the running of yarn coverage to, for now, ensure that the utils folder is
 - make prayerbook search case insensitive
 - include default prayers in prayerbook
 
+3/31/23
+- determine PR standards and create github PR template
+
 Backlog
 - implement onboarding pages
 - remove unnecessary data from slices
@@ -221,7 +224,6 @@ Backlog
 - ensure that past habit data (when a habit is made) is not marked in red
 - figure out text truncation for habit titles
 - handle habit editing locally instead of in state
-- determine PR standards and create github PR template
 
 </p>
 </details>
