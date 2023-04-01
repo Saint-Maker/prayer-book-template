@@ -217,6 +217,7 @@ We use the running of yarn coverage to, for now, ensure that the utils folder is
 
 3/31/23
 - Improve UX of draggable elements
+- Determine PR standards and create github PR template
 
 Backlog
 - implement onboarding pages
@@ -227,7 +228,6 @@ Backlog
 - ensure that past habit data (when a habit is made) is not marked in red
 - figure out text truncation for habit titles
 - handle habit editing locally instead of in state
-- determine PR standards and create github PR template
 
 </p>
 </details>
