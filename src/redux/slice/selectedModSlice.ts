@@ -1,30 +1,20 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 
-import { idb } from '~utils/idb'
+import { sliceGet, sliceSet, sliceAdd, sliceDeleteSingle } from './utils/sliceTools'
 
 const defaultState = ['p_ZWA-iUSiMmeeAF', 'eUD9oEbSHr8tEm4R']
 
 export const getSelectedMods = createAsyncThunk('selectedMod/getSelectedMods', async () => {
-    let data = (await idb.readData('selectedMods')) || []
-    if (!Array.isArray(data) || data.length === 0) {
-        data = defaultState
-        await idb.writeData('selectedMods', data)
-    }
-    return data
+    return await sliceGet('selectedMods', defaultState)
 })
 export const setSelectedMods = createAsyncThunk('selectedMod/setSelectedMods', async (selectedMods: string[]) => {
-    return idb.writeData('selectedMods', selectedMods)
+    return sliceSet(selectedMods, 'selectedMods')
 })
 export const addSelectedMod = createAsyncThunk('selectedMod/addSelectedMod', async (selectedMod: string) => {
-    const data = (await idb.readData('selectedMods')) || []
-    return idb.writeData('selectedMods', [selectedMod, ...data])
+    return await sliceAdd(selectedMod, 'selectedMods')
 })
 export const deleteSelectedMod = createAsyncThunk('selectedMod/deleteSelectedMod', async (id: string) => {
-    const data = (await idb.readData('selectedMods')) || []
-    return idb.writeData(
-        'selectedMods',
-        data.filter((modId) => modId !== id),
-    )
+    return await sliceDeleteSingle(id, 'selectedMods')
 })
 
 const initialState = {

@@ -1,31 +1,17 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-
-import { idb } from '~utils/idb'
+import { sliceGet, sliceAdd, sliceEdit, sliceDeleteSingle } from './utils/sliceTools'
 
 export const getCustomMods = createAsyncThunk('customMod/getCustomMods', async () => {
-    return (await idb.readData('customMods')) || []
+    return await sliceGet('customMods')
 })
 export const addCustomMod = createAsyncThunk('customMod/addCustomMod', async (customMod: Mod) => {
-    const data = (await idb.readData('customMods')) || []
-    return idb.writeData('customMods', [customMod, ...data])
+    return await sliceAdd(customMod, 'customMods')
 })
 export const editCustomMod = createAsyncThunk('customMod/editCustomMod', async (editedCustomMod: Mod) => {
-    const data = (await idb.readData('customMods')) || []
-    const updatedCustomMods = data.map((customMod) => {
-        if ((customMod as Mod).id === editedCustomMod.id) return editedCustomMod
-        return customMod
-    })
-    return idb.writeData('customMods', updatedCustomMods)
-})
-export const editCustomMods = createAsyncThunk('customMod/editCustomMods', async (updatedCustomMods: Mod[]) => {
-    return idb.writeData('customMods', updatedCustomMods)
+    return await sliceEdit(editedCustomMod, 'customMods')
 })
 export const deleteCustomMod = createAsyncThunk('customMod/deleteCustomMod', async (id: string) => {
-    const data = (await idb.readData('customMods')) || []
-    return idb.writeData(
-        'customMods',
-        data.filter((customMod) => (customMod as Mod).id !== id),
-    )
+    return await sliceDeleteSingle(id, 'customMods')
 })
 
 const initialState = {
@@ -44,9 +30,6 @@ const customModSlice = createSlice({
             state.data = action.payload as Mod[]
         },
         [editCustomMod.fulfilled.type]: (state, action) => {
-            state.data = action.payload as Mod[]
-        },
-        [editCustomMods.fulfilled.type]: (state, action) => {
             state.data = action.payload as Mod[]
         },
         [deleteCustomMod.fulfilled.type]: (state, action) => {

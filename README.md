@@ -15,7 +15,6 @@ The draft of the SaintMaker PWA. Will eventually include a prayerbook, confessio
 <p>
 
 The SaintMaker has the goal of being "moddable" in that you can create additional applications independent of it and link them back to it. However, we curate said applications.
-
 If you would like to create a mod for the SaintMaker then the steps for doing so are as follows:
 - Fork the SaintMaker mod template and build your new application on top of it https://github.com/Saint-Maker/saint-maker-mod-template/pulls
 - Create a pull request off of this repository. To integrate your mod into our "marketplace" you'll need to run `yarn mod {your mod name} {your github user/organization name}` this will generate a json file with a name like `Examen_cb0806151.json` in `src/mods` with a similar structure to the json included below. 
@@ -219,15 +218,13 @@ We use the running of yarn coverage to, for now, ensure that the utils folder is
 - Improve UX of draggable elements
 - Determine PR standards and create github PR template
 
+4/20/23
+- simplify slices
+
 Backlog
 - implement onboarding pages
-- remove unnecessary data from slices
-- set idb to use generics
-- unify around calling them 'apps' or 'mods'
+- implement tool to find unexported code
 - figure out how to give mods custom sidebar icons
-- ensure that past habit data (when a habit is made) is not marked in red
-- figure out text truncation for habit titles
-- handle habit editing locally instead of in state
 
 </p>
 </details>

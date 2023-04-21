@@ -3,9 +3,10 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { idb } from '~utils/idb'
 import { getUpdatedHabits } from '~utils/habits/getUpdatedHabits'
 import { shouldUpdateHabits } from '~utils/habits/shouldUpdateHabits'
+import { sliceGet, sliceAdd, sliceEdit, sliceSet, sliceDeleteSingle } from './utils/sliceTools'
 
 export const getHabits = createAsyncThunk('habit/getHabits', async () => {
-    let data = ((await idb.readData('habits')) || []) as Habit[]
+    let data = await sliceGet('habits') as Habit[]
     if (shouldUpdateHabits()) {
         data = getUpdatedHabits([...data])
         idb.writeData('habits', data)
@@ -13,26 +14,16 @@ export const getHabits = createAsyncThunk('habit/getHabits', async () => {
     return data
 })
 export const addHabit = createAsyncThunk('habit/addHabit', async (habit: Habit) => {
-    const data = (await idb.readData('habits')) || []
-    return idb.writeData('habits', [habit, ...data])
+    return await sliceAdd(habit, 'habits')
 })
 export const editHabit = createAsyncThunk('habit/editHabit', async (editedHabit: Habit) => {
-    const data = (await idb.readData('habits')) || []
-    const updatedHabits = data.map((habit) => {
-        if ((habit as Habit).id === editedHabit.id) return editedHabit
-        return habit
-    })
-    return idb.writeData('habits', updatedHabits)
+    return await sliceEdit(editedHabit, 'habits')
 })
-export const editHabits = createAsyncThunk('habit/editHabits', async (updatedHabits: Habit[]) => {
-    return idb.writeData('habits', updatedHabits)
+export const setHabits = createAsyncThunk('habit/setHabits', async (updatedHabits: Habit[]) => {
+    return sliceSet(updatedHabits, 'habits')
 })
 export const deleteHabit = createAsyncThunk('habit/deleteHabit', async (id: string) => {
-    const data = (await idb.readData('habits')) || []
-    return idb.writeData(
-        'habits',
-        data.filter((habit) => (habit as Habit).id !== id),
-    )
+    return await sliceDeleteSingle(id, 'habits')
 })
 
 const initialState = {
@@ -58,7 +49,7 @@ const habitSlice = createSlice({
         [editHabit.fulfilled.type]: (state, action) => {
             state.data = action.payload as Habit[]
         },
-        [editHabits.fulfilled.type]: (state, action) => {
+        [setHabits.fulfilled.type]: (state, action) => {
             state.data = action.payload as Habit[]
         },
         [deleteHabit.fulfilled.type]: (state, action) => {

@@ -4,6 +4,7 @@ import { idb } from '~utils/idb'
 
 // @ts-ignore
 import defaultModData from './../../defaultModData.json'
+import { sliceAdd, sliceDeleteSingle, sliceEdit, sliceSet } from './utils/sliceTools'
 
 export const getMods = createAsyncThunk('mod/getMods', async () => {
     const defaultMods = defaultModData
@@ -13,26 +14,16 @@ export const getMods = createAsyncThunk('mod/getMods', async () => {
     return allMods
 })
 export const addMod = createAsyncThunk('mod/addMod', async (mod: Mod) => {
-    const data = (await idb.readData('mods')) || []
-    return idb.writeData('mods', [mod, ...data])
+    return await sliceAdd(mod, 'mods')
 })
 export const editMod = createAsyncThunk('mod/editMod', async (editedMod: Mod) => {
-    const data = (await idb.readData('mods')) || []
-    const updatedMods = data.map((mod) => {
-        if ((mod as Mod).id === editedMod.id) return editedMod
-        return mod
-    })
-    return idb.writeData('mods', updatedMods)
+    return await sliceEdit(editedMod, 'mods')
 })
-export const editMods = createAsyncThunk('mod/editMods', async (updatedMods: Mod[]) => {
-    return idb.writeData('mods', updatedMods)
+export const setMods = createAsyncThunk('mod/setMods', async (mods: Mod[]) => {
+    return sliceSet(mods, 'mods')
 })
 export const deleteMod = createAsyncThunk('mod/deleteMod', async (id: string) => {
-    const data = (await idb.readData('mods')) || []
-    return idb.writeData(
-        'mods',
-        data.filter((mod) => (mod as Mod).id !== id),
-    )
+    return await sliceDeleteSingle(id, 'prayers')
 })
 
 const initialState = {
@@ -58,7 +49,7 @@ const modSlice = createSlice({
         [editMod.fulfilled.type]: (state, action) => {
             state.data = action.payload as Mod[]
         },
-        [editMods.fulfilled.type]: (state, action) => {
+        [setMods.fulfilled.type]: (state, action) => {
             state.data = action.payload as Mod[]
         },
         [deleteMod.fulfilled.type]: (state, action) => {
