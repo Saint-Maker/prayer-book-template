@@ -17,7 +17,8 @@
     "prepare": "husky install",
     "dry-test": "jscpd ./src --threshold=1",
     "generate-dry-report": "jscpd ./src --reporters=html",
-    "mod": "node generateModTemplate.js"
+    "mod": "node generateModTemplate.js",
+    "ctm": "node changeToModTemplate.js"
   },
   "dependencies": {
     "@chakra-ui/react": "^2.2.1",

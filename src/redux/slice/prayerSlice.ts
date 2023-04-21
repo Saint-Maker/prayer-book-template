@@ -5,7 +5,10 @@ import defaultPrayerData from './../../defaultPrayerData.json'
 import { sliceGet, sliceAdd, sliceSet, sliceEdit, sliceDeleteSingle, sliceDeleteAll } from './utils/sliceTools'
 
 export const getPrayers = createAsyncThunk('prayer/getPrayers', async () => {
-    return await sliceGet('prayers', defaultPrayerData.map((prayer: Partial<Prayer>) => ({ ...prayer, id: nanoid(16) })))
+    return await sliceGet(
+        'prayers',
+        defaultPrayerData.map((prayer: Partial<Prayer>) => ({ ...prayer, id: nanoid(16) })),
+    )
 })
 export const addPrayer = createAsyncThunk('prayer/addPrayer', async (prayer: Prayer) => {
     return await sliceAdd(prayer, 'prayers')

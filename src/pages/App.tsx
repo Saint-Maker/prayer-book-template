@@ -14,7 +14,7 @@ import { getMods } from '~slices/modSlice'
 import { ModBtnLink } from '~components/ModBtnLink'
 import { getSelectedMods, setSelectedMods } from '~slices/selectedModSlice'
 import { Header } from '~components/Header'
-import './global.css'
+import '../global.css'
 
 export const App = (): JSX.Element => {
     const pwa = useSelector(selectPWA)

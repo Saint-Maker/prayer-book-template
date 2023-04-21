@@ -6,7 +6,7 @@ import { shouldUpdateHabits } from '~utils/habits/shouldUpdateHabits'
 import { sliceGet, sliceAdd, sliceEdit, sliceSet, sliceDeleteSingle } from './utils/sliceTools'
 
 export const getHabits = createAsyncThunk('habit/getHabits', async () => {
-    let data = await sliceGet('habits') as Habit[]
+    let data = (await sliceGet('habits')) as Habit[]
     if (shouldUpdateHabits()) {
         data = getUpdatedHabits([...data])
         idb.writeData('habits', data)

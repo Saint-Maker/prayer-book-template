@@ -2,7 +2,7 @@ import { Prayer } from '~pages/Prayers'
 import { Habits } from '~pages/Habits'
 import { ModSelect } from '~pages/ModSelect'
 
-import { App } from '../App'
+import { App } from '../pages/App'
 
 export const routes = [
     {
