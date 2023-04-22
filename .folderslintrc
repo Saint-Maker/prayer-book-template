@@ -3,6 +3,7 @@
   "rules": [
     "components/*",
     "constants",
+    "hooks",
     "mods",
     "pages/*",
     "redux",

@@ -19,6 +19,7 @@ fs.rmdirSync(`${__dirname}/src/utils/habits`, { recursive: true, force: true })
 fs.rmdirSync(`${__dirname}/src/tests/utils`, { recursive: true, force: true })
 fs.rmdirSync(`${__dirname}/src/styles`, { recursive: true, force: true })
 fs.rmdirSync(`${__dirname}/src/mods`, { recursive: true, force: true })
+fs.rmdirSync(`${__dirname}/src/hooks`, { recursive: true, force: true })
 
 // remove unused files
 fs.unlinkSync(`${__dirname}/src/defaultPrayerData.json`)
@@ -164,14 +165,13 @@ fs.writeFileSync(
       "redux/slice",
       "redux/slice/utils",
       "tests",
-      "utils",
+      "utils"
     ]
 }
 `,
     { encoding: 'utf8' },
 )
 
-// fs.writeFileSync(`${__dirname}/tsconfig.json`,`something`,{encoding:'utf8'})
 fs.writeFileSync(
     `${__dirname}/package.json`,
     `
@@ -192,7 +192,7 @@ fs.writeFileSync(
       "lint": "eslint . --ext .ts,.tsx --fix",
       "folderslint": "folderslint",
       "prepare": "husky install",
-      "dry-test": "jscpd ./src --threshold=1",
+      "dry-test": "jscpd ./src --threshold=0",
       "generate-dry-report": "jscpd ./src --reporters=html"
     },
     "dependencies": {
