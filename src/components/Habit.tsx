@@ -4,7 +4,7 @@ import { BsPencil, BsArrowLeftCircle, BsArrowRightCircle } from 'react-icons/bs'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { DAYS_IN_WEEK } from '~constants/habits'
-import { deleteHabit, editHabit, editHabits } from '~slices/habitSlice'
+import { deleteHabit, editHabit, setHabits } from '~slices/habitSlice'
 import { AppDispatch, selectHabits } from '~store'
 
 interface HabitProps {
@@ -44,7 +44,7 @@ export const Habit = ({ habit }: HabitProps) => {
             updatedHabit.editing = id === habit.id ? !habit.editing : false
             return updatedHabit
         })
-        dispatch(editHabits(updatedHabits))
+        dispatch(setHabits(updatedHabits))
     }
 
     const getWeekdayHighlightColor = (habit: Habit, dayIndex: number, currentDay: number) => {

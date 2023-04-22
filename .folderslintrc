@@ -3,10 +3,12 @@
   "rules": [
     "components/*",
     "constants",
+    "hooks",
     "mods",
     "pages/*",
     "redux",
     "redux/slice",
+    "redux/slice/utils",
     "styles",
     "tests",
     "tests/utils",

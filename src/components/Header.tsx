@@ -14,16 +14,14 @@ import {
     Box,
     Flex,
 } from '@chakra-ui/react'
-import { ReactElement, ReactNode, useEffect, useRef, useState } from 'react'
+import { ReactElement, ReactNode, useRef } from 'react'
 import { AiFillHome, AiOutlineMenu } from 'react-icons/ai'
 import { BsListUl, BsMoonFill, BsSunFill } from 'react-icons/bs'
-import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
-import { getMods } from '~slices/modSlice'
-import { AppDispatch, selectMods, selectSelectedMods } from '~store'
 import { ModHeaderBtnLink } from '~components/ModHeaderBtnLink'
-import { getSelectedMods } from '~slices/selectedModSlice'
+
+import { sortedModHook } from '../hooks/sortedModHook'
 
 type Props = {
     children: unknown
@@ -37,26 +35,8 @@ export const Header = ({ children, title, headerBtns, drawerBtns }: Props) => {
 
     const { colorMode, toggleColorMode } = useColorMode()
     const btnRef = useRef<HTMLButtonElement>(null)
-    const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
-    const mods = useSelector(selectMods)
-    const selectedMods = useSelector(selectSelectedMods)
-    const [sortedMods, setSortedMods] = useState<Mod[]>([])
-
-    useEffect(() => {
-        dispatch(getSelectedMods())
-        dispatch(getMods())
-    }, [])
-
-    useEffect(() => {
-        const modsSorted: Mod[] = []
-        selectedMods.data.forEach((modId) => {
-            mods.data.find((mod) => {
-                if (mod.id === modId) modsSorted.push(mod)
-            })
-        })
-        setSortedMods(modsSorted)
-    }, [mods, selectedMods])
+    const { sortedMods } = sortedModHook()
 
     return (
         <>
