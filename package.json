@@ -18,7 +18,7 @@
     "dry-test": "jscpd ./src --threshold=1",
     "generate-dry-report": "jscpd ./src --reporters=html",
     "mod": "node generateModTemplate.js",
-    "ctm": "node changeToModTemplate.js"
+    "ctm": "node changeToModTemplate.js && format"
   },
   "dependencies": {
     "@chakra-ui/react": "^2.2.1",
