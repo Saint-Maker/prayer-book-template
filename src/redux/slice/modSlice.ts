@@ -1,10 +1,10 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 
 import { idb } from '~utils/idb'
+import { sliceAdd, sliceDeleteSingle, sliceEdit, sliceSet } from '~slices/utils/sliceTools'
 
 // @ts-ignore
 import defaultModData from './../../defaultModData.json'
-import { sliceAdd, sliceDeleteSingle, sliceEdit, sliceSet } from './utils/sliceTools'
 
 export const getMods = createAsyncThunk('mod/getMods', async () => {
     const defaultMods = defaultModData

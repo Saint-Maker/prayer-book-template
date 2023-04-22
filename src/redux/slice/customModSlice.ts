@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { sliceGet, sliceAdd, sliceEdit, sliceDeleteSingle } from './utils/sliceTools'
+
+import { sliceGet, sliceAdd, sliceEdit, sliceDeleteSingle } from '~slices/utils/sliceTools'
 
 export const getCustomMods = createAsyncThunk('customMod/getCustomMods', async () => {
     return await sliceGet('customMods')

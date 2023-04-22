@@ -1,8 +1,9 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { nanoid } from 'nanoid'
 
+import { sliceGet, sliceAdd, sliceSet, sliceEdit, sliceDeleteSingle, sliceDeleteAll } from '~slices/utils/sliceTools'
+
 import defaultPrayerData from './../../defaultPrayerData.json'
-import { sliceGet, sliceAdd, sliceSet, sliceEdit, sliceDeleteSingle, sliceDeleteAll } from './utils/sliceTools'
 
 export const getPrayers = createAsyncThunk('prayer/getPrayers', async () => {
     return await sliceGet(

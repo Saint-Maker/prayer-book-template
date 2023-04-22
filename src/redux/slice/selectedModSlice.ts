@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 
-import { sliceGet, sliceSet, sliceAdd, sliceDeleteSingle } from './utils/sliceTools'
+import { sliceGet, sliceSet, sliceAdd, sliceDeleteSingle } from '~slices/utils/sliceTools'
 
 const defaultState = ['p_ZWA-iUSiMmeeAF', 'eUD9oEbSHr8tEm4R']
 

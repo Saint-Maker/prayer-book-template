@@ -3,7 +3,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { idb } from '~utils/idb'
 import { getUpdatedHabits } from '~utils/habits/getUpdatedHabits'
 import { shouldUpdateHabits } from '~utils/habits/shouldUpdateHabits'
-import { sliceGet, sliceAdd, sliceEdit, sliceSet, sliceDeleteSingle } from './utils/sliceTools'
+import { sliceGet, sliceAdd, sliceEdit, sliceSet, sliceDeleteSingle } from '~slices/utils/sliceTools'
 
 export const getHabits = createAsyncThunk('habit/getHabits', async () => {
     let data = (await sliceGet('habits')) as Habit[]
