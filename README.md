@@ -1,4 +1,4 @@
-# prayer-book-template
+# SaintMaker Core
 
 Created by [Cendy](https://www.upwork.com/freelancers/~01b3ada479ef818cc7)
 
@@ -7,7 +7,7 @@ Modified by Krysztof
 <details><summary>Description</summary>
 <p>
 
-The draft of the SaintMaker PWA. Will eventually include a prayerbook, confession guide, habit tracker, Lectio Divina guide, and more.
+The draft of the SaintMaker PWA. Will eventually function as the town square for a multitude of other apps like a examination of conscience guide, a habit tracker, a lectio divina, etc.
 
 </p>
 </details>
@@ -15,10 +15,11 @@ The draft of the SaintMaker PWA. Will eventually include a prayerbook, confessio
 <p>
 
 The SaintMaker has the goal of being "moddable" in that you can create additional applications independent of it and link them back to it. However, we curate said applications.
+
 If you would like to create a mod for the SaintMaker then the steps for doing so are as follows:
-- Fork the SaintMaker mod template and build your new application on top of it https://github.com/Saint-Maker/saint-maker-mod-template/pulls
-- Create a pull request off of this repository. To integrate your mod into our "marketplace" you'll need to run `yarn mod {your mod name} {your github user/organization name}` this will generate a json file with a name like `Examen_cb0806151.json` in `src/mods` with a similar structure to the json included below. 
-- Once you've filled out that json with your mods detail your pull request is ready to submit.
+- Fork the SaintMaker core repository and build your new application on top of it https://github.com/Saint-Maker/prayer-book-template-a
+- To integrate your mod into our "marketplace" you'll need to create a branch off of the core repository; within it, run `yarn mod {your mod name} {your github user/organization name}`, this will generate a json file with a name like `Examen_cb0806151.json` in `src/mods` with a similar structure to the json included below. 
+- Once you've filled out that json with your mods details, your pull request is ready to submit.
 - We will then review your pull request and its corresponding codebase. If we believe it fits our audience (we probably will) we'll merge it; however, if it does not, users will still be able to add it as a custom mod.
 
 ```
@@ -220,6 +221,11 @@ We use the running of yarn coverage to, for now, ensure that the utils folder is
 
 4/20/23
 - simplify slices
+
+4/21/23
+- wrap up changeover to mod template script
+- bring DRY back up to a 100%
+- update the readme with the new mod creation instructions
 
 Backlog
 - implement onboarding pages
