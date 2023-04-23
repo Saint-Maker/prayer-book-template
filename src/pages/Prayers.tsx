@@ -26,6 +26,8 @@ import 'react-quill/dist/quill.snow.css'
 import '~styles/pagesPrayers.css'
 import { Header } from '~components/Header'
 import { AlertModal } from '~components/AlertModal'
+import { uploadData } from '~utils/uploadData'
+import { downloadData } from '~utils/downloadData'
 
 export const Prayer = () => {
     const { isOpen: isDeleteAlertOpen, onOpen: onDeleteAlertOpen, onClose: onDeleteAlertClose } = useDisclosure()
@@ -105,18 +107,7 @@ export const Prayer = () => {
     }
 
     const downloadPrayerbook = () => {
-        const prayerBook = JSON.stringify(prayers.data)
-        const blob = new Blob([prayerBook], { type: 'text/json' })
-        const anchor = document.createElement('a')
-        anchor.download = 'prayerbook.json'
-        anchor.href = window.URL.createObjectURL(blob)
-        const clickEvt = new MouseEvent('click', {
-            view: window,
-            bubbles: true,
-            cancelable: true,
-        })
-        anchor.dispatchEvent(clickEvt)
-        anchor.remove()
+        downloadData(prayers.data, 'prayerbook')
     }
 
     const triggerUpload = () => {
@@ -124,24 +115,18 @@ export const Prayer = () => {
     }
 
     const uploadPrayerbook = (event: any) => {
-        const fileReader = new FileReader()
-        fileReader.readAsText(event.target.files[0], 'UTF-8')
-        fileReader.onload = (e) => {
-            try {
-                const stringResult: string = e.target !== null ? (e.target.result as string) : ''
-                const result = JSON.parse(stringResult)
+        uploadData(
+            event,
+            (result: any) => {
                 const purifiedResult = result.map((prayer: Prayer) => {
                     prayer.text = DOMPurify.sanitize(prayer.text)
                     prayer.title = DOMPurify.sanitize(prayer.title)
                     return prayer
                 })
                 dispatch(setPrayers(purifiedResult))
-            } catch (e) {
-                onInvalidFileAlertOpen()
-            } finally {
-                event.target.value = ''
-            }
-        }
+            },
+            onInvalidFileAlertOpen,
+        )
     }
 
     return (

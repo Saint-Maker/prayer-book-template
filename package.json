@@ -16,7 +16,8 @@
     "folderslint": "folderslint",
     "prepare": "husky install",
     "dry-test": "jscpd ./src --threshold=0",
-    "generate-dry-report": "jscpd ./src --reporters=html",
+    "gdr": "jscpd ./src --reporters=html",
+    "or": "brave-browser ./report/html/index.html",
     "mod": "node generateModTemplate.js",
     "ctm": "node changeToModTemplate.js && yarn format && yarn install && rm -r ./changeToModTemplate.js"
   },
