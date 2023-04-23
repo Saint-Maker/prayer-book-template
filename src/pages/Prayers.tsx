@@ -27,7 +27,7 @@ import '~styles/pagesPrayers.css'
 import { Header } from '~components/Header'
 import { AlertModal } from '~components/AlertModal'
 
-export const Prayer = () => {
+const Prayer = () => {
     const { isOpen: isDeleteAlertOpen, onOpen: onDeleteAlertOpen, onClose: onDeleteAlertClose } = useDisclosure()
     const { isOpen: isUploadAlertOpen, onOpen: onUploadAlertOpen, onClose: onUploadAlertClose } = useDisclosure()
     const {
@@ -265,3 +265,5 @@ export const Prayer = () => {
         </Layout>
     )
 }
+
+export default Prayer

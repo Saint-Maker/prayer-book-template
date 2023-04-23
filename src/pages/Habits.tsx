@@ -10,7 +10,7 @@ import { Habit } from '~components/Habit'
 import { Header } from '~components/Header'
 import { Layout } from '~components/Layout'
 
-export const Habits = () => {
+const Habits = () => {
     const dispatch = useDispatch<AppDispatch>()
     const habits = useSelector(selectHabits)
     const addInputRef = useRef<HTMLInputElement | null>(null)
@@ -51,3 +51,5 @@ export const Habits = () => {
         </Layout>
     )
 }
+
+export default Habits

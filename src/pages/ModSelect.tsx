@@ -12,7 +12,7 @@ import { addCustomMod } from '~slices/customModSlice'
 import { addMod, getMods } from '~slices/modSlice'
 import { AppDispatch, selectMods } from '~store'
 
-export const ModSelect = () => {
+const ModSelect = () => {
     const dispatch = useDispatch<AppDispatch>()
     const mods = useSelector(selectMods)
     const [isOpen, setIsOpen] = useState(false)
@@ -109,3 +109,5 @@ export const ModSelect = () => {
         </>
     )
 }
+
+export default ModSelect

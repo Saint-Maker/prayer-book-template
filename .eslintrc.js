@@ -95,4 +95,12 @@ module.exports = {
         'require-jsdoc': 'off',
         'max-len': 'off',
     },
+    overrides: [
+        {
+            files: ['src/pages/*.tsx'],
+            rules: {
+                'import/no-default-export': 0,
+            },
+        },
+    ],
 }

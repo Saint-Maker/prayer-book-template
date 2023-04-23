@@ -1,27 +1,29 @@
-import { Prayer } from '~pages/Prayers'
-import { Habits } from '~pages/Habits'
-import { ModSelect } from '~pages/ModSelect'
-import { App } from '~pages/App'
+import React from 'react'
+
+const HomeComponent = React.lazy(() => import('../pages/App'))
+const PrayerBookComponent = React.lazy(() => import('../pages/Prayers'))
+const HabitsComponent = React.lazy(() => import('../pages/Habits'))
+const ModSelectComponent = React.lazy(() => import('../pages/ModSelect'))
 
 export const routes = [
     {
         name: 'Home',
         path: '/',
-        destination: <App />,
+        destination: <HomeComponent />,
     },
     {
         name: 'Prayer Book',
         path: '/prayers',
-        destination: <Prayer />,
+        destination: <PrayerBookComponent />,
     },
     {
         name: 'Habits',
         path: '/habits',
-        destination: <Habits />,
+        destination: <HabitsComponent />,
     },
     {
         name: 'Select a Mod',
         path: '/mods',
-        destination: <ModSelect />,
+        destination: <ModSelectComponent />,
     },
 ]

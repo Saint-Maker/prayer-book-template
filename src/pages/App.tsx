@@ -17,7 +17,7 @@ import { Header } from '~components/Header'
 import '../global.css'
 import { sortedModHook } from '../hooks/sortedModHook'
 
-export const App = (): JSX.Element => {
+const App = (): JSX.Element => {
     const pwa = useSelector(selectPWA)
     const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
@@ -97,3 +97,5 @@ export const App = (): JSX.Element => {
         </Layout>
     )
 }
+
+export default App

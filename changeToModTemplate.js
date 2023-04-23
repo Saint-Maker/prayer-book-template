@@ -35,7 +35,7 @@ fs.unlinkSync(`${__dirname}/generateModTemplate.js`)
 
 // remove files from partially used directories
 pruneDirectory(`${__dirname}/src/redux/slice`, ['index.ts', 'utils'])
-pruneDirectory(`${__dirname}/src/pages`, ['App.tsx'])
+pruneDirectory(`${__dirname}/src/pages`, ['App.tsx', 'Loading.tsx'])
 pruneDirectory(`${__dirname}/src/constants`, ['routes.tsx'])
 pruneDirectory(`${__dirname}/src/components`, ['Header.tsx'])
 
@@ -81,13 +81,15 @@ export const App = (): JSX.Element => {
 fs.writeFileSync(
     `${__dirname}/src/constants/routes.tsx`,
     `
-    import { App } from '~pages/App'
+    import React from 'react'
+
+    const HomeComponent = React.lazy(() => import('../pages/App'))
 
     export const routes = [
         {
             name: 'Home',
             path: '/',
-            destination: <App />,
+            destination: <HomeComponent />,
         },
     ]
 `,
