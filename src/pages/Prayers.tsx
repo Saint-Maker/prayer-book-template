@@ -23,7 +23,6 @@ import type { AppDispatch } from '~store'
 import { PrayerCard } from '~components/PrayerCard'
 import { Layout } from '~components/Layout'
 import 'react-quill/dist/quill.snow.css'
-import '~styles/pagesPrayers.css'
 import { Header } from '~components/Header'
 import { AlertModal } from '~components/AlertModal'
 

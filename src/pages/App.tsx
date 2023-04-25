@@ -14,7 +14,6 @@ import { ModBtnLink } from '~components/ModBtnLink'
 import { setSelectedMods } from '~slices/selectedModSlice'
 import { Header } from '~components/Header'
 
-import '../global.css'
 import { sortedModHook } from '../hooks/sortedModHook'
 
 const App = (): JSX.Element => {

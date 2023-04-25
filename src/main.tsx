@@ -18,8 +18,8 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <Provider store={store}>
             <AnimatePresence exitBeforeEnter>
                 <ChakraProvider theme={theme}>
-                    <React.Suspense fallback={<Loading />}>
-                        <Router>
+                    <Router>
+                        <React.Suspense fallback={<Loading />}>
                             <Routes>
                                 {routes.map((route, index) => (
                                     <Route
@@ -29,8 +29,8 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
                                     />
                                 ))}
                             </Routes>
-                        </Router>
-                    </React.Suspense>
+                        </React.Suspense>
+                    </Router>
                 </ChakraProvider>
             </AnimatePresence>
         </Provider>
