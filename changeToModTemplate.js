@@ -17,7 +17,6 @@ const pruneDirectory = (directory, ignored) => {
 // remove unused directories
 fs.rmdirSync(`${__dirname}/src/utils/habits`, { recursive: true, force: true })
 fs.rmdirSync(`${__dirname}/src/tests/utils`, { recursive: true, force: true })
-fs.rmdirSync(`${__dirname}/src/styles`, { recursive: true, force: true })
 fs.rmdirSync(`${__dirname}/src/mods`, { recursive: true, force: true })
 fs.rmdirSync(`${__dirname}/src/hooks`, { recursive: true, force: true })
 
