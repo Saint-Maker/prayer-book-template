@@ -231,10 +231,14 @@ We use the running of yarn coverage to, for now, ensure that the utils folder is
 - implement download/upload functionality for habits
 - implement code splitting to speed up page performance
 
+4/24/23
+- move css files to optimize load times
+
 Backlog
 - implement onboarding pages
 - implement tool to find unexported code
 - figure out how to give mods custom sidebar icons
+- research CodeScene to optimize development speed
 
 </p>
 </details>
