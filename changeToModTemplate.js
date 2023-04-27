@@ -53,7 +53,7 @@ fs.writeFileSync(
         reducer: slices,
     })
 
-    // type RootState = ReturnType<typeof store.getState>
+    type RootState = ReturnType<typeof store.getState>
 
     export type AppDispatch = typeof store.dispatch
 `,
@@ -147,6 +147,18 @@ The description of your new mod.
 
 </p>
 </details>
+`,
+    { encoding: 'utf8' },
+)
+
+fs.writeFileSync(
+    `${__dirname}/.unimportedrc.json`,
+    `
+{
+    "ignoreUnresolved": ["virtual:pwa-register"],
+    "ignoreUnimported": ["src/test-globals.ts", "src/redux/slice/utils/sliceTools.ts", "src/utils/downloadData.ts", "src/utils/idb.ts", "src/utils/localStorage.ts", "src/utils/uploadData.ts"],
+    "ignoreUnused": ["localforage"]
+}
 `,
     { encoding: 'utf8' },
 )
