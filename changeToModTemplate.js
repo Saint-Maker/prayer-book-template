@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const fs = require('fs')
 const path = require('path')
 
@@ -14,30 +15,57 @@ const pruneDirectory = (directory, ignored) => {
     })
 }
 
-// remove unused directories
-fs.rmdirSync(`${__dirname}/src/utils/habits`, { recursive: true, force: true })
-fs.rmdirSync(`${__dirname}/src/tests/utils`, { recursive: true, force: true })
-fs.rmdirSync(`${__dirname}/src/styles`, { recursive: true, force: true })
-fs.rmdirSync(`${__dirname}/src/mods`, { recursive: true, force: true })
-fs.rmdirSync(`${__dirname}/src/hooks`, { recursive: true, force: true })
+const unusedDirectories = ['/src/utils/habits', '/src/tests/utils', '/src/styles', '/src/mods', '/src/hooks']
+const unusedFiles = [
+    '/src/defaultPrayerData.json',
+    '/src/defaultModData.json',
+    '/src/index.d.ts',
+    '/pull_request_template.md',
+    '/generateDefaultModList.js',
+    '/generateModTemplate.js',
+]
+const prunedDirectories = [
+    {
+        path: '/src/redux/slice',
+        ignore: ['index.ts', 'utils'],
+    },
+    {
+        path: '/src/pages',
+        ignore: ['App.tsx'],
+    },
+    {
+        path: '/src/constants',
+        ignore: ['routes.tsx'],
+    },
+    {
+        path: '/src/components',
+        ignore: ['Header.tsx'],
+    },
+]
 
-// remove unused files
-fs.unlinkSync(`${__dirname}/src/defaultPrayerData.json`)
-try {
-    fs.unlinkSync(`${__dirname}/src/defaultModData.json`)
-} catch (e) {
-    console.log('defaultModData has not been generated')
-}
-fs.unlinkSync(`${__dirname}/src/index.d.ts`)
-fs.unlinkSync(`${__dirname}/pull_request_template.md`)
-fs.unlinkSync(`${__dirname}/generateDefaultModList.js`)
-fs.unlinkSync(`${__dirname}/generateModTemplate.js`)
+unusedDirectories.forEach((path) => {
+    try {
+        fs.rmdirSync(`${__dirname}${path}`, { recursive: true, force: true })
+    } catch (e) {
+        console.log(`${path} could not be removed`)
+    }
+})
 
-// remove files from partially used directories
-pruneDirectory(`${__dirname}/src/redux/slice`, ['index.ts', 'utils'])
-pruneDirectory(`${__dirname}/src/pages`, ['App.tsx'])
-pruneDirectory(`${__dirname}/src/constants`, ['routes.tsx'])
-pruneDirectory(`${__dirname}/src/components`, ['Header.tsx'])
+unusedFiles.forEach((path) => {
+    try {
+        fs.unlinkSync(`${__dirname}${path}`)
+    } catch (e) {
+        console.log(`${path} could not be removed`)
+    }
+})
+
+prunedDirectories.forEach(({ path, ignore }) => {
+    try {
+        pruneDirectory(`${__dirname}${path}`, ignore)
+    } catch (e) {
+        console.log(`${path} could not be pruned`)
+    }
+})
 
 // edit default files
 
@@ -64,12 +92,15 @@ fs.writeFileSync(
     `${__dirname}/src/pages/App.tsx`,
     `
 import { Box } from '@chakra-ui/react'
+
 import { Header } from '~components/Header'
 
 export const App = (): JSX.Element => {
     return (
         <Box p="2">
-            <Header title="Mod Template" />
+            <Header title="Mod Template">
+                <></>
+            </Header>
         </Box>
     )
 }
