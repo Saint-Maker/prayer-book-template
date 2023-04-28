@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const fs = require('fs')
 const path = require('path')
 
@@ -14,30 +15,57 @@ const pruneDirectory = (directory, ignored) => {
     })
 }
 
-// remove unused directories
-fs.rmdirSync(`${__dirname}/src/utils/habits`, { recursive: true, force: true })
-fs.rmdirSync(`${__dirname}/src/tests/utils`, { recursive: true, force: true })
-fs.rmdirSync(`${__dirname}/src/styles`, { recursive: true, force: true })
-fs.rmdirSync(`${__dirname}/src/mods`, { recursive: true, force: true })
-fs.rmdirSync(`${__dirname}/src/hooks`, { recursive: true, force: true })
+const unusedDirectories = ['/src/utils/habits', '/src/tests/utils', '/src/styles', '/src/mods', '/src/hooks']
+const unusedFiles = [
+    '/src/defaultPrayerData.json',
+    '/src/defaultModData.json',
+    '/src/index.d.ts',
+    '/pull_request_template.md',
+    '/generateDefaultModList.js',
+    '/generateModTemplate.js',
+]
+const prunedDirectories = [
+    {
+        path: '/src/redux/slice',
+        ignore: ['index.ts', 'utils'],
+    },
+    {
+        path: '/src/pages',
+        ignore: ['App.tsx'],
+    },
+    {
+        path: '/src/constants',
+        ignore: ['routes.tsx'],
+    },
+    {
+        path: '/src/components',
+        ignore: ['Header.tsx'],
+    },
+]
 
-// remove unused files
-fs.unlinkSync(`${__dirname}/src/defaultPrayerData.json`)
-try {
-    fs.unlinkSync(`${__dirname}/src/defaultModData.json`)
-} catch (e) {
-    console.log('defaultModData has not been generated')
-}
-fs.unlinkSync(`${__dirname}/src/index.d.ts`)
-fs.unlinkSync(`${__dirname}/pull_request_template.md`)
-fs.unlinkSync(`${__dirname}/generateDefaultModList.js`)
-fs.unlinkSync(`${__dirname}/generateModTemplate.js`)
+unusedDirectories.forEach((path) => {
+    try {
+        fs.rmdirSync(`${__dirname}${path}`, { recursive: true, force: true })
+    } catch (e) {
+        console.log(`${path} could not be removed`)
+    }
+})
 
-// remove files from partially used directories
-pruneDirectory(`${__dirname}/src/redux/slice`, ['index.ts', 'utils'])
-pruneDirectory(`${__dirname}/src/pages`, ['App.tsx'])
-pruneDirectory(`${__dirname}/src/constants`, ['routes.tsx'])
-pruneDirectory(`${__dirname}/src/components`, ['Header.tsx'])
+unusedFiles.forEach((path) => {
+    try {
+        fs.unlinkSync(`${__dirname}${path}`)
+    } catch (e) {
+        console.log(`${path} could not be removed`)
+    }
+})
+
+prunedDirectories.forEach(({ path, ignore }) => {
+    try {
+        pruneDirectory(`${__dirname}${path}`, ignore)
+    } catch (e) {
+        console.log(`${path} could not be pruned`)
+    }
+})
 
 // edit default files
 
@@ -53,7 +81,7 @@ fs.writeFileSync(
         reducer: slices,
     })
 
-    // type RootState = ReturnType<typeof store.getState>
+    type RootState = ReturnType<typeof store.getState>
 
     export type AppDispatch = typeof store.dispatch
 `,
@@ -64,12 +92,15 @@ fs.writeFileSync(
     `${__dirname}/src/pages/App.tsx`,
     `
 import { Box } from '@chakra-ui/react'
+
 import { Header } from '~components/Header'
 
 export const App = (): JSX.Element => {
     return (
         <Box p="2">
-            <Header title="Mod Template" />
+            <Header title="Mod Template">
+                <></>
+            </Header>
         </Box>
     )
 }
@@ -101,25 +132,45 @@ import {
     HStack,
     IconButton,
     Heading,
+    useDisclosure,
+    Button,
+    Drawer,
+    DrawerBody,
+    DrawerCloseButton,
+    DrawerContent,
+    DrawerHeader,
+    DrawerOverlay,
+    useColorMode,
     Box,
+    Flex,
 } from '@chakra-ui/react'
-import { ReactElement } from 'react'
-import { BsArrowLeft } from 'react-icons/bs'
+import { ReactElement, ReactNode, useRef } from 'react'
+import { AiFillHome, AiOutlineMenu } from 'react-icons/ai'
+import { BsMoonFill, BsSunFill } from 'react-icons/bs'
 import { useNavigate } from 'react-router-dom'
 
+
+
 type Props = {
+    children: unknown
     title: string
     headerBtns?: ReactElement
+    drawerBtns?: ReactNode
 }
 
-export const Header = ({ title, headerBtns }: Props) => {
+export const Header = ({ children, title, headerBtns, drawerBtns }: Props) => {
+    const { isOpen, onOpen, onClose } = useDisclosure()
+
+    const { colorMode, toggleColorMode } = useColorMode()
+    const btnRef = useRef<HTMLButtonElement>(null)
     const navigate = useNavigate()
 
     return (
+        <>
             <HStack justifyContent="space-between">
                 <>
                     <Box flex="1">
-                        <IconButton onClick={() => navigate(-1)} aria-label="Menu" icon={<BsArrowLeft />} />
+                        <IconButton onClick={onOpen} ref={btnRef} aria-label="Menu" icon={<AiOutlineMenu />} />
                     </Box>
                     <Box flex="1" textAlign="center">
                         <Heading as="h1">{title}</Heading>
@@ -129,6 +180,36 @@ export const Header = ({ title, headerBtns }: Props) => {
                     </Box>
                 </>
             </HStack>
+            {children}
+            <Drawer isOpen={isOpen} placement="left" onClose={onClose} finalFocusRef={btnRef}>
+                <DrawerOverlay />
+                <DrawerContent>
+                    <DrawerCloseButton />
+                    <DrawerHeader>Menu</DrawerHeader>
+                    <DrawerBody display="flex">
+                        <Flex display="flex" direction="column" gap="2" width="100%">
+                            <Button
+                                    onClick={() => navigate(-1)} 
+                                w="full"
+                                leftIcon={<AiFillHome />}
+                                justifyContent="flex-start"
+                            >
+                                Home
+                            </Button>
+                            <Button
+                                onClick={toggleColorMode}
+                                w="full"
+                                leftIcon={colorMode === 'light' ? <BsMoonFill /> : <BsSunFill />}
+                                justifyContent="flex-start"
+                            >
+                                Toggle {colorMode === 'light' ? 'Dark' : 'Light'}
+                            </Button>
+                            {drawerBtns}
+                        </Flex>
+                    </DrawerBody>
+                </DrawerContent>
+            </Drawer>
+        </>
     )
 }
 `,
@@ -147,6 +228,18 @@ The description of your new mod.
 
 </p>
 </details>
+`,
+    { encoding: 'utf8' },
+)
+
+fs.writeFileSync(
+    `${__dirname}/.unimportedrc.json`,
+    `
+{
+    "ignoreUnresolved": ["virtual:pwa-register"],
+    "ignoreUnimported": ["src/test-globals.ts", "src/redux/slice/utils/sliceTools.ts", "src/utils/downloadData.ts", "src/utils/idb.ts", "src/utils/localStorage.ts", "src/utils/uploadData.ts"],
+    "ignoreUnused": ["localforage"]
+}
 `,
     { encoding: 'utf8' },
 )
