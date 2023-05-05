@@ -1,4 +1,4 @@
 {
     "ignoreUnresolved": ["virtual:pwa-register"],
-    "ignoreUnimported": ["src/test-globals.ts"]
+    "ignoreUnimported": ["src/test-globals.ts", "src/utils/localStorage.ts"]
 }
