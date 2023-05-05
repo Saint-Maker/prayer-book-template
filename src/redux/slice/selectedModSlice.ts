@@ -3,7 +3,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { sliceGet, sliceSet, sliceAdd } from '~slices/utils/sliceTools'
 import { idb } from '~utils/idb'
 
-const defaultState = ['p_ZWA-iUSiMmeeAF', 'eUD9oEbSHr8tEm4R']
+const defaultState = ['piKfm_vdfBOEtu_X', 'eUD9oEbSHr8tEm4R']
 
 export const getSelectedMods = createAsyncThunk('selectedMod/getSelectedMods', async () => {
     return await sliceGet('selectedMods', defaultState)

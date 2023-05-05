@@ -9,7 +9,6 @@ export const store = configureStore({
 type RootState = ReturnType<typeof store.getState>
 
 export const selectPrayers = (state: RootState) => state.prayers
-export const selectHabits = (state: RootState) => state.habits
 export const selectPWA = (state: RootState) => state.pwa
 export const selectMods = (state: RootState) => state.mods
 export const selectSelectedMods = (state: RootState) => state.selectedMods

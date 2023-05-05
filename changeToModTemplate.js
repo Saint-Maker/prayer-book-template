@@ -15,7 +15,7 @@ const pruneDirectory = (directory, ignored) => {
     })
 }
 
-const unusedDirectories = ['/src/utils/habits', '/src/tests/utils', '/src/styles', '/src/mods', '/src/hooks']
+const unusedDirectories = ['/src/styles', '/src/mods', '/src/hooks']
 const unusedFiles = [
     '/src/defaultPrayerData.json',
     '/src/defaultModData.json',

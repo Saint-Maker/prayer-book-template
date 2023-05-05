@@ -10,10 +10,6 @@
     "redux/slice",
     "redux/slice/utils",
     "styles",
-    "tests",
-    "tests/utils",
-    "tests/utils/habits",
     "utils",
-    "utils/habits"
    ]
 }

@@ -4,13 +4,6 @@ interface Prayer {
   text: string
 }
 
-interface Habit {
-  id: string
-  name: string
-  days: boolean[]
-  editing: boolean
-}
-
 interface Mod {
   id: string
   name: string
