@@ -8,7 +8,6 @@ export default defineConfig({
     test: {
         root: '.',
         globals: true,
-        globalSetup: './src/test-globals.ts',
         watch: false,
         environment: 'jsdom',
         coverage: {
