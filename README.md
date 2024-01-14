@@ -17,10 +17,10 @@ The draft of the SaintMaker PWA. Will eventually function as the town square for
 The SaintMaker has the goal of being "moddable" in that you can create additional applications independent of it and link them back to it. However, we curate said applications.
 
 If you would like to create a mod for the SaintMaker then the steps for doing so are as follows:
-- Fork the SaintMaker core repository and build your new application on top of it https://github.com/Saint-Maker/prayer-book-template-a
-- To integrate your mod into our "marketplace" you'll need to create a branch off of the core repository; within it, run `yarn mod {your mod name} {your github user/organization name}`, this will generate a json file with a name like `Examen_cb0806151.json` in `src/mods` with a similar structure to the json included below. 
-- Once you've filled out that json with your mods details, your pull request is ready to submit.
-- We will then review your pull request and its corresponding codebase. If we believe it fits our audience (we probably will) we'll merge it; however, if it does not, users will still be able to add it as a custom mod.
+1. Fork the SaintMaker core repository and build your new application on top of it https://github.com/Saint-Maker/saint-maker-core
+2. To integrate your mod into our "marketplace" you'll need to create a branch off of the core repository; within it, run `yarn mod {your mod name (no spaces)} {your github user/organization name}`, this will generate a json file with a name like `Examen_cb0806151.json` in `src/mods` with a similar structure to the json included below. 
+3. Once you've filled out that json with your mods details, your pull request is ready to submit.
+4. We will then review your pull request and its corresponding codebase. If we believe it fits our audience (we probably will) we'll merge it; however, if it does not, users will still be able to add it as a custom mod.
 
 ```
 {
